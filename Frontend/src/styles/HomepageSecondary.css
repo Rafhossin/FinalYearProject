@@ -1,0 +1,88 @@
+.main-container2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 20px; Space below your navbar */
+  /* padding: 2rem; Space inside the container */
+  /* background-color: #4c7ead; */
+}
+
+.text-container2 {
+  flex-basis: 50%; /* Take up half of the container's width */
+  /* Space between the text and image */
+  padding-left: 2.5rem; /*Space between the text and the edge of the container*/
+
+  padding: auto;
+}
+
+/*About Diabetes*/
+.text-container2 h2.title {
+  margin-top: 0.5rem;
+  font-size: 2rem; /* Large text for the heading */
+  margin-bottom: 0rem; /* Space below the heading */
+  color: white;
+}
+
+.text-container2 h2.title2 {
+  font-size: 2rem; /* Large text for the heading */
+  margin-bottom: 1rem; /* Space below the heading */
+  color: white;
+}
+.text-container2 h2.title1 {
+  font-size: 2.5rem; /* Large text for the heading */
+  margin-bottom: 1rem; /* Space below the heading */
+  color: white;
+}
+
+/*About Diabetes*/
+.text-container2 ul,
+p.subtitle {
+  font-size: 1rem; /* Adjust the font size as necessary */
+  margin-bottom: 1rem; /* Space above the button */
+  margin-right: 1rem;
+  color: white;
+}
+/*About Diabetes*/
+.text-container2 ul {
+  list-style-position: inside; /* Ensures the bullets are inside the padding area */
+  padding-left: 30px; /* This will move the entire list, including bullets, to the right */
+}
+
+.text-container2 p.subtitle2 {
+  font-size: 1rem; /* Adjust the font size as necessary */
+  margin-bottom: 2rem; /* Space above the button */
+  margin-right: 1rem;
+  color: white;
+}
+
+.text-container2 button {
+  padding: 1.5rem; /* Padding inside the button */
+  background-color: white; /* Background color of the button */
+  color: "#303030"; /* Text color of the button */
+  border: none; /* No border */
+  cursor: pointer; /* Cursor for button */
+  /* transition: background-color 0.3s ease; Transition for hover effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.text-container2 button:hover {
+  background-color: #bb4d4a; /* Darken button on hover */
+  color: white;
+  transform: translateY(-5px); /* Slight raise effect on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+}
+
+.image-container2 {
+  flex-basis: 50%; /* Take up half of the container's width */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+}
+
+.image-container2 img {
+  width: 100%; /* Responsive image size */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 500px; /* Limit the height */
+  object-fit: cover;
+  border-radius: none; /* Rounded corners for the image */
+}

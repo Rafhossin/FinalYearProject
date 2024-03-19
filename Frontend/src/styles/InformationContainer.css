@@ -1,0 +1,39 @@
+.info-container {
+  padding: 100px; /* Increase padding as per your design needs */
+
+  background-color: #333; /* Dark background, adjust color as needed */
+  color: #fff; /* White text color */
+  text-align: center; /* Center-align the text */
+  max-width: auto; /* Maximum width of the container */
+  margin: 0 auto; /* Center the container horizontally */
+  display: flex; /* Using flexbox */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Center children horizontally */
+}
+
+.info-container h2 {
+  font-size: 2rem; /* Adjust the font size for the heading */
+  color: #fff; /* White color for the heading text */
+  margin-bottom: 20px; /* Add more space below the heading */
+  font-weight: bold; /* Optional: if you want the heading to be bold */
+}
+
+.info-container p {
+  font-size: 1rem; /* Adjust the font size for the paragraph */
+  margin-bottom: 20px; /* Add more space below the paragraph */
+  line-height: 1.6; /* Adjust line height for better readability */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .info-container {
+    padding: 60px; /* Slightly less padding on smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .info-container {
+    padding: 40px; /* Even less padding on mobile */
+  }
+}
