@@ -1,0 +1,62 @@
+/* ContactStyle.css */
+
+.contact-container {
+  /* font-family: "Arial", sans-serif; */
+  padding: 100px;
+  background-color: #333;
+  color: white;
+  max-width: auto; /* Maximum width of the container */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+.disclaimer {
+  margin-top: 10px;
+}
+.contact-container {
+  padding-left: 10rem;
+}
+
+.contact-container a {
+  color: #ebeb34;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.contact-container a:hover {
+  color: wheat; /* Change to your preferred hover color */
+}
+
+.contact-container p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .contact-container h2 {
+    font-size: 18px;
+  }
+
+  .contact-container p {
+    font-size: 14px;
+  }
+
+  .contact-container {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container h2 {
+    font-size: 16px;
+  }
+
+  .contact-container p {
+    font-size: 12px;
+  }
+
+  .contact-container {
+    padding: 10px;
+  }
+}

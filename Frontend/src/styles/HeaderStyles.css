@@ -1,0 +1,24 @@
+.header-container {
+  display: flex;
+  padding: 160px; /* Adjust the padding as needed */
+  color: white; /* Text color */
+  align-items: center; /* Vertically center content */
+  justify-content: space-between; /* Space out text and button */
+}
+.header-text1 h2.hTitle1 {
+  font-size: 2rem; /* Large text for the heading */
+  margin-bottom: 1rem; /* Space below the heading */
+  color: white;
+}
+.header-text1 h2.hTitle2 {
+  font-size: 3.5rem; /* Large text for the heading */
+  margin-bottom: 1rem; /* Space below the heading */
+  color: white;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header-text1 h2 {
+    font-size: 0.5rem; /* Adjust the font size as necessary */
+  }
+}

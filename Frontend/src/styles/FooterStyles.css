@@ -1,0 +1,96 @@
+/* FooterStyles.css */
+.footer {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color: #d9534f;
+  color: white;
+  /* position: absolute;
+  bottom: 0; */
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+
+.logo-section {
+  align-items: flex-start;
+}
+
+/* .links-section,
+.nav-section {
+  align-items: center;
+} */
+
+.nav-section {
+  margin-right: 180px;
+}
+
+.footer-logo {
+  height: 50px; /* Adjust the height as needed */
+  width: auto; /* Maintain the aspect ratio */
+  margin-bottom: 50px;
+}
+
+.footer-section a {
+  color: white;
+  text-decoration: none;
+  margin-bottom: 10px;
+  padding: 2px;
+}
+
+.footer-section a:hover {
+  background-color: #ebeb34; /* Darken button on hover */
+  color: black;
+  border: 2px solid solid solid wheat; /* Add a border to each button */
+  border-radius: 4px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  border-top: 1px solid white; /* Separating border */
+  margin-top: auto; /* Pushes to the bottom */
+  margin-bottom: 20px;
+}
+/* Responsive styles - when the screen width is 768px or less */
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-section {
+    align-items: center; /* Center items on smaller screens */
+  }
+
+  .nav-section {
+    margin-right: 0; /* Remove the right margin on smaller screens */
+  }
+
+  .footer-section a {
+    text-align: center; /* Center the text of links */
+  }
+
+  .footer-bottom {
+    border-top: 1px solid white; /* Keep the separating border */
+    padding-top: 20px; /* Add some padding above the legal text */
+  }
+}
+
+/* If you need even more control on smaller screens, such as mobile phones */
+@media (max-width: 480px) {
+  /* Add any additional styles for very small screens here */
+}

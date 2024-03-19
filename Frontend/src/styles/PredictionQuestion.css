@@ -1,0 +1,83 @@
+.pred-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #e9f5f9; */
+  background-color: #333;
+}
+.merged-container {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  display: block;
+  height: 70%;
+}
+
+.merged-sub-container {
+  margin-top: 100px;
+  display: grid;
+  width: 900px; /* Set the width */
+  height: 600px; /* Set the height */
+  overflow: auto; /* Add a scrollbar if the content is larger than the container */
+  grid-template-columns: 2fr 1fr;
+
+  background-color: #aec8d1;
+  border-radius: 20px;
+  box-shadow: white 0px 0px 5px;
+  border: 1px solid white;
+}
+
+.buttons-prediction {
+  margin-top: 20px;
+  margin-left: 5%;
+  padding-bottom: 15%;
+}
+
+.buttons-prediction button:nth-of-type(1) {
+  margin-right: 100px;
+}
+
+.buttons-prediction button:nth-of-type(2) {
+  margin-right: 30px;
+}
+
+.why-important {
+  margin-top: 20px;
+  margin-left: 5%;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.why-important img {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+}
+.right-container-prediction {
+  position: relative;
+  background-color: #bb4d4a;
+  width: 100%;
+  height: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex; /* Add this line */
+  justify-content: center; /* Add this line */
+  align-items: center; /* Add this li
+  /* padding-top: 15%; */
+  border-radius: 20px;
+  box-shadow: white 0px 0px 2px;
+}
+
+.left-container-prediction h1 {
+  padding-left: 5%;
+  padding-top: 10%;
+  font-size: 36px;
+  font-weight: "bold";
+}
+
+.left-container-prediction h2 {
+  margin-top: 20px;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 0%;
+}

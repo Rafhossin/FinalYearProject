@@ -1,0 +1,107 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e9f5f9;
+}
+.merged-container {
+  margin-top: 100px;
+
+  width: 40%;
+}
+
+.color-container {
+  border: 1px solid #000;
+  background-color: #ca3d3d;
+  padding: 20px;
+  width: 100%;
+  box-shadow: #000 0px 0px 10px;
+}
+.signup-border-box {
+  border: 1px solid grey;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: #000 0px 0px 2px;
+  background-color: #b5bcc7;
+}
+.signup-border-box ul {
+  margin-left: 10px;
+}
+.signup {
+  align-items: center;
+  height: 145vh; /* This will make the container take up the full height of the viewport */
+  padding: 80px;
+  border: 2px solid #000;
+  width: 100%;
+
+  margin-bottom: 100px;
+  padding-bottom: 100px;
+  background-color: white;
+  box-shadow: #000 0px 0px 10px;
+}
+
+.signup h1 {
+  margin-bottom: 30px;
+}
+.signup form label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.error-message {
+  color: red;
+}
+.signup-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.signup-btn Button {
+  margin-bottom: 20px;
+}
+
+.signup form label input,
+.signup form label select,
+button {
+  margin-top: 10px;
+  align-self: center;
+}
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 768px) {
+  .signup {
+    padding: 20px; /* Reduce padding for smaller screens */
+    padding-bottom: 20px; /* Reduce padding for smaller screens */
+  }
+}
+
+/* Media query for screens larger than 768px */
+@media (min-width: 768px) {
+  .merged-container {
+    width: 40%; /* Increase width for larger screens */
+  }
+
+  .signup {
+    padding: 80px; /* Increase padding for larger screens */
+    padding-bottom: 80px; /* Increase padding for larger screens */
+  }
+}
+
+/* Media query for screens larger than 1024px */
+@media (min-width: 1024px) {
+  .merged-container {
+    width: 60%; /* Increase width for larger screens */
+  }
+
+  .signup {
+    padding: 60px; /* Increase padding for larger screens */
+    padding-bottom: 60px; /* Increase padding for larger screens */
+  }
+}

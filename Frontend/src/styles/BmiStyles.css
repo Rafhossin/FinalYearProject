@@ -1,0 +1,133 @@
+.main-container3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 20px; Space below your navbar */
+  /* padding: 2rem; Space inside the container */
+  /* background-color: #4c7ead; */
+}
+
+.text-container3 {
+  flex-basis: 50%; /* Take up half of the container's width */
+  /* Space between the text and image */
+  padding-left: 2.5rem; /*Space between the text and the edge of the container*/
+
+  padding: auto;
+}
+
+/*About Diabetes*/
+.text-container3 ol,
+p.list {
+  font-size: 1rem; /* Adjust the font size as necessary */
+  margin-bottom: 1rem; /* Space above the button */
+  margin-right: 1rem;
+
+  color: black;
+}
+
+.subtitle4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: black;
+}
+.text-container3 li {
+  margin-left: 40px; /* Adjust the value as needed */
+}
+/*About Diabetes*/
+.text-container3 ul {
+  list-style-position: inside; /* Ensures the bullets are inside the padding area */
+  padding-left: 30px; /* This will move the entire list, including bullets, to the right */
+}
+
+.image-container3 {
+  flex-basis: 50%; /* Take up half of the container's width */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+}
+
+.image-container3 img {
+  width: 100%; /* Responsive image size */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 500px; /* Limit the height */
+  object-fit: cover;
+  border-radius: none; /* Rounded corners for the image */
+}
+.bmi-container {
+  /* font-family: "Arial", sans-serif; */
+  padding: 100px;
+  background-color: #f4d8d8;
+  /* color: white; */
+  max-width: auto; /* Maximum width of the container */
+  margin: 0 auto; /* Center the container horizontally */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+} */
+
+.input-container label {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  font-size: 1.2rem;
+  margin-bottom: 35px;
+}
+
+/* .input-container input {
+  width: 70%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid#bc5858;
+  border-radius: 5px;
+} */
+
+.bmi-btn button {
+  padding: 1rem; /* Padding inside the button */
+  width: 200px;
+  background-color: teal; /* Background color of the button */
+  color: white; /* Text color of the button */
+  border: none; /* No border */
+  cursor: pointer; /* Cursor for button */
+  /* transition: background-color 0.3s ease; Transition for hover effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+  margin-top: 20px; /* Space above the button */
+}
+.bmi-btn button:hover {
+  background-color: #bb4d4a; /* Darken button on hover */
+  color: white;
+  transform: translateY(-5px); /* Slight raise effect on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+}
+#weight-label {
+  position: relative;
+}
+
+#weight-slider,
+.slider-labels {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+}
+.slider-labels span {
+  font-size: 1rem;
+  color: #000;
+}
+
+#weight-label {
+  width: 60px;
+  white-space: nowrap;
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid#bc5858;
+  border-radius: 5px;
+  background-color: #fff;
+  text-align: center;
+}
