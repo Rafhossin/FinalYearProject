@@ -55,7 +55,7 @@ const user = new Schema(
       ],
     },
   },
-  { collection: "User" }
+  { collection: "User", timestamps: true }
 );
 
 const SALT_WORK_FACTOR = 10;
