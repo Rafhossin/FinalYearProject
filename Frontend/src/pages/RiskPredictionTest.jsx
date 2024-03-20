@@ -24,7 +24,7 @@ import LowRisk from "../assets/images/riskTest/lowRisk.png"; // Import the image
 
 const RiskPredictionTest = () => {
   const navigate = useNavigate();
-  // Inside your component
+
   const { user } = useContext(UserContext); // Get the user data from the UserContext
   console.log("User: ", user);
   axios.defaults.withCredentials = true;
@@ -205,7 +205,7 @@ const RiskPredictionTest = () => {
     if (indexQuestion === questions.length - 1) {
       // submit form
       //const result = await callYourMLAlgorithm(formData);
-      const result = "negative";
+      const result = "positive";
       setPredictionResult(result);
       return;
     }

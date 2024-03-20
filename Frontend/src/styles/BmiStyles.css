@@ -56,7 +56,7 @@ p.list {
 .bmi-container {
   /* font-family: "Arial", sans-serif; */
   padding: 100px;
-  background-color: #f4d8d8;
+  background-color: rgb(244, 240, 240);
   /* color: white; */
   max-width: auto; /* Maximum width of the container */
   margin: 0 auto; /* Center the container horizontally */
@@ -66,12 +66,17 @@ p.list {
   justify-content: center;
 }
 
-/* .input-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-} */
+.input-container {
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 40px;
+  margin-top: 20px;
+  width: 800px;
+  border: 1px solid #bc5858;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: #000 0px 0px 10px;
+}
 
 .input-container label {
   display: flex;
@@ -122,7 +127,7 @@ p.list {
 }
 
 #weight-label {
-  width: 60px;
+  width: 70px;
   white-space: nowrap;
   margin-top: 10px;
   padding: 5px;
@@ -130,4 +135,18 @@ p.list {
   border-radius: 5px;
   background-color: #fff;
   text-align: center;
+}
+#pound-label {
+  width: 110px;
+  white-space: nowrap;
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid#bc5858;
+  border-radius: 5px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.subtitle4 {
+  margin-bottom: 20px;
 }

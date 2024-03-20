@@ -6,6 +6,7 @@ import employeeRoutes from "./routes/employeeRoutes.js";
 import userRoutes from "./routes/userRoutes.js"; // import user routes
 import authRoutes from "./routes/authRoutes.js"; // import auth routes
 import updateProfileRoutes from "./routes/updateProfileRoutes.js"; // import update profile routes
+import updateBMIHeightWeightRoutes from "./routes/updateBMIHeightWeightRoutes.js"; // import update profile routes
 import forgotPassRoutes from "./routes/forgotPasswordRoutes.js"; // import reset password routes
 import resetPasswordRoutes from "./routes/resetPasswordRoutes.js"; // import reset password routes
 import verifyUserRoutes from "./routes/verifyUserRoutes.js"; // import verify user routes
@@ -34,6 +35,7 @@ app.use("/api/employees", employeeRoutes);
 app.use("/api/users", userRoutes); // use user routes
 app.use("/api/auth", authRoutes); // use auth routes
 app.use("/api/profile", updateProfileRoutes);
+app.use("/api", updateBMIHeightWeightRoutes);
 app.use("/api", forgotPassRoutes);
 app.use("/api", resetPasswordRoutes);
 app.use("/api", verifyUserRoutes);
