@@ -70,7 +70,7 @@ export const diabetesPredictionController = async (req, res) => {
 
     // Send the form data to the Flask model
     const response = await axios.post(
-      "http://127.0.0.1:5000/predict",
+      "https://aibetic2-75e99e1607a5.herokuapp.com/predict",
       formattedData
     );
 
