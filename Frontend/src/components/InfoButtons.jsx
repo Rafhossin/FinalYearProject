@@ -18,7 +18,7 @@ const InfoButtons = () => {
         <img src={diagnosingIcon} alt="Diagnosing Diabetes" />
         <span>Diagnosing Diabetes</span>
       </Link>
-      <Link to="/living" className="info-button">
+      <Link to="/living-with-diabetes" className="info-button">
         <img src={livingIcon} alt="Life With Diabetes" />
         <span>Life With Diabetes</span>
       </Link>

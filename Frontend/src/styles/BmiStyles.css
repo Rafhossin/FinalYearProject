@@ -18,7 +18,7 @@
 /*About Diabetes*/
 .text-container3 ol,
 p.list {
-  font-size: 1rem; /* Adjust the font size as necessary */
+  font-size: 1.3rem; /* Adjust the font size as necessary */
   margin-bottom: 1rem; /* Space above the button */
   margin-right: 1rem;
 
@@ -26,9 +26,10 @@ p.list {
 }
 
 .subtitle4 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
   color: black;
+  margin-bottom: 10px;
 }
 .text-container3 li {
   margin-left: 40px; /* Adjust the value as needed */
@@ -97,6 +98,7 @@ p.list {
 .bmi-btn button {
   padding: 1rem; /* Padding inside the button */
   width: 200px;
+  font-size: 1.3rem; /* Font size of the button text */
   background-color: teal; /* Background color of the button */
   color: white; /* Text color of the button */
   border: none; /* No border */
@@ -145,8 +147,4 @@ p.list {
   border-radius: 5px;
   background-color: #fff;
   text-align: center;
-}
-
-.subtitle4 {
-  margin-bottom: 20px;
 }

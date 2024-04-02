@@ -20,7 +20,6 @@ import { Box, Flex, Stack, Radio, RadioGroup } from "@chakra-ui/react";
 
 const BMI = () => {
   const navigate = useNavigate();
-
   const { user } = useContext(UserContext); // Get the user data from the UserContext
   console.log("User: ", user);
   axios.defaults.withCredentials = true;
@@ -160,19 +159,6 @@ const BMI = () => {
       }
       return;
     }
-
-    // axios
-    //   .post("/api/bmi", {
-    //     bmi,
-    //     height: totalHeightInMeters,
-    //     weight,
-    //   }) // Send the data to the server
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
 
     setBmiCategory(category);
 

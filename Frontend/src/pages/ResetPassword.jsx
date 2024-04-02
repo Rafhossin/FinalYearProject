@@ -57,10 +57,21 @@ const ResetPassword = () => {
     }
 
     try {
+      // const response = await axios.put(
+      //   `http://localhost:3000/api/reset-password/${token}`,
+      //   {
+      //     password,
+      //   }
+      // );
       const response = await axios.put(
-        `http://localhost:3000/api/reset-password/${token}`,
+        `http://localhost:3000/api/reset-password`,
         {
           password,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -69,7 +80,7 @@ const ResetPassword = () => {
         console.log(` Password: ${password}`);
         setError("");
         // Redirect the user to the login page
-        navigate("/");
+        navigate("/login");
       } else {
         setError("An unexpected error occurred,please try again later");
       }

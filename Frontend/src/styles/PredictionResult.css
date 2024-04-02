@@ -24,7 +24,7 @@
   background-color: #aec8d1;
   border-radius: 20px;
   box-shadow: white 0px 0px 5px;
-  border: 1px solid white;
+  border: 1px solid blue;
 }
 
 .right-container-prediction1 {
@@ -56,7 +56,7 @@
   padding-top: 0%;
 }
 .left-sub-container-prediction1 {
-  border: 1px solid #000;
+  border: 1px solid #bb4d4a;
   padding: 35px;
   margin-top: 20px;
   background-color: #f9f9f9;

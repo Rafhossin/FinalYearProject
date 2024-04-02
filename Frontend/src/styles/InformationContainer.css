@@ -20,7 +20,7 @@
 }
 
 .info-container p {
-  font-size: 1rem; /* Adjust the font size for the paragraph */
+  font-size: 1.3rem; /* Adjust the font size for the paragraph */
   margin-bottom: 20px; /* Add more space below the paragraph */
   line-height: 1.6; /* Adjust line height for better readability */
 }

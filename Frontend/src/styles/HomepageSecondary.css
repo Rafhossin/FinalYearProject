@@ -37,7 +37,7 @@
 /*About Diabetes*/
 .text-container2 ul,
 p.subtitle {
-  font-size: 1rem; /* Adjust the font size as necessary */
+  font-size: 1.3rem; /* Adjust the font size as necessary */
   margin-bottom: 1rem; /* Space above the button */
   margin-right: 1rem;
   color: white;
@@ -49,7 +49,7 @@ p.subtitle {
 }
 
 .text-container2 p.subtitle2 {
-  font-size: 1rem; /* Adjust the font size as necessary */
+  font-size: 1.3rem; /* Adjust the font size as necessary */
   margin-bottom: 2rem; /* Space above the button */
   margin-right: 1rem;
   color: white;
@@ -57,6 +57,7 @@ p.subtitle {
 
 .text-container2 button {
   padding: 1.5rem; /* Padding inside the button */
+  font-size: 1.3rem; /* Font size of the button text */
   background-color: white; /* Background color of the button */
   color: "#303030"; /* Text color of the button */
   border: none; /* No border */
@@ -82,7 +83,9 @@ p.subtitle {
 .image-container2 img {
   width: 100%; /* Responsive image size */
   height: auto; /* Maintain aspect ratio */
-  max-height: 500px; /* Limit the height */
+  /* max-height: 550px; Limit the height */
+  max-height: 650px;
+
   object-fit: cover;
   border-radius: none; /* Rounded corners for the image */
 }

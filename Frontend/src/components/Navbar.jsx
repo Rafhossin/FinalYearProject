@@ -12,6 +12,7 @@ import updateProfileIcon from "../assets/icons/update.png";
 import logoutIcon from "../assets/icons/logout.png";
 import Cookies from "js-cookie"; // Import js-cookie
 import axios from "axios";
+import { CgProfile } from "react-icons/cg";
 
 const Navbar = () => {
   const { user, setUser } = useContext(UserContext); // Access user and setUser from UserContext
@@ -71,7 +72,8 @@ const Navbar = () => {
         </div>
         <div className="navbar-account">
           <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <img src={accountImage} alt="Account" className="account-image" />
+            {/* <img src={accountImage} alt="Account" className="account-image" /> */}
+            <CgProfile size={25} color="black" style={{ padding: 5 }} />
             Account
           </button>
           <div

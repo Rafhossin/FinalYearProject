@@ -13,7 +13,7 @@ const aboutDiabPage = () => {
 
   // Function to handle the button click
   const handleRiskTestClick = () => {
-    navigate("/risk-test"); // Navigate to the Risk Test page
+    navigate("/start-cancelPred"); // Navigate to the Start cancel Prediction page
   };
 
   return (
@@ -51,6 +51,7 @@ const aboutDiabPage = () => {
             "Identifying and managing diabetes early can significantly reduce the risk of developing its complications."
           }
           imagePath={symtomImage}
+          imageHeight={"800px"}
           altText={"symtom image"}
           bgcolor={"#008080"}
         />

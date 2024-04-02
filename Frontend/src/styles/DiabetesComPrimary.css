@@ -1,0 +1,77 @@
+/* .main-container {
+  margin-top: 75px;
+} */
+
+.dcp-main-container-com {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*margin-top: 40px;  Space below your navbar */
+  /* padding: 2rem; /*Space inside the container */
+  /* background-color: #303030; */
+}
+.dcp-text-container-com {
+  flex-basis: 50%; /* Take up half of the container's width */
+  /* Space between the text and image */
+  /* padding-left: 4.5rem; Space between the text and the edge of the container */
+  margin-left: 3rem;
+  /* margin-right: rem; */
+}
+
+.dcp-text-container-com h2.dcp-title2 {
+  font-size: 2rem; /* Large text for the heading */
+  margin-bottom: 1rem; /* Space below the heading */
+  color: black;
+}
+.dcp-text-container-com h2.dcp-title1 {
+  font-size: 2.5rem; /* Large text for the heading */
+  margin-bottom: 1rem; /* Space below the heading */
+  color: black;
+}
+
+.dcp-text-container-com h2.dcp-title3 {
+  font-size: 1.5rem; /* Large text for the heading */
+  margin-bottom: 1rem; /* Space below the heading */
+  color: black;
+}
+
+.dcp-text-container-com p.dcp-subtitle1 {
+  font-size: 1.3rem; /* Adjust the font size as necessary */
+  margin-bottom: 2rem; /* Space above the button */
+  color: black;
+}
+
+.dcp-text-container-com button {
+  padding: 1.5rem; /* Padding inside the button */
+  font-size: 1.3rem; /* Font size of the button text */
+  background-color: teal; /* Background color of the button */
+  color: white; /* Text color of the button */
+  border: none; /* No border */
+  cursor: pointer; /* Cursor for button */
+  /* transition: background-color 0.3s ease; Transition for hover effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+  margin-bottom: 20px;
+}
+
+.dcp-text-container-com button:hover {
+  background-color: #bb4d4a; /* Darken button on hover */
+  color: white;
+  transform: translateY(-5px); /* Slight raise effect on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+}
+
+.dcp-image-container-com {
+  flex-basis: 59.5%; /* Take up half of the container's width */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  margin-left: 2.6rem;
+}
+
+.dcp-image-container-com img {
+  width: 100%; /* Responsive image size */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 550px; /*Limit the height*/
+  object-fit: cover;
+  border-radius: none; /* Rounded corners for the image */
+}
