@@ -1,0 +1,130 @@
+.glucose-log-container {
+  /* font-family: "Arial", sans-serif; */
+  padding: 100px;
+  /* background-color: #f9f9f9; */
+  background-color: #fefafa;
+  color: black;
+  max-width: auto; /* Maximum width of the container */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+.glucose-log-container h1 {
+  font-size: 30px;
+  color: black;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  font-weight: bold;
+}
+.cbsLevel1 {
+  font-size: 1.3rem;
+}
+
+.glucose-log-container p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  /* margin-top: 16px; */
+  /* margin-bottom: 16px; */
+}
+
+.glucose-log-container img {
+  display: block;
+  width: 30%;
+  height: 30%;
+  margin: 50px auto 50px auto;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4); /* Horizontal offset, vertical offset, blur radius, and color */
+}
+.target-range {
+  padding: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: 1px solid #bb4d4a;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4); /* Horizontal offset, vertical offset, blur radius, and color */
+}
+
+.target-range h1,
+h2 {
+  font-size: 24px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+.main-container ul {
+  list-style-position: inside; /* Ensures the bullets are inside the padding area */
+  font-size: 1.3rem;
+  padding-left: 40px; /* This will move the entire list, including bullets, to the right */
+  margin-top: 16px;
+}
+
+.glucoseRangeImage p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-top: 16px;
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+.mgLevel,
+.bsLvel,
+.cbsLevel {
+  padding-bottom: 20px;
+}
+
+.glucose-meter {
+  background-color: #e9f4f9;
+  padding: 60px;
+  padding-top: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.red-text {
+  color: red;
+}
+.dp1 {
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 30px;
+}
+.dp1 label {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .glucose-log-container h1 {
+    font-size: 20px;
+  }
+
+  .glucose-log-container h2 {
+    font-size: 18px;
+  }
+
+  .glucose-log-container p {
+    font-size: 14px;
+  }
+
+  .glucose-log-container {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .glucose-log-container h1 {
+    font-size: 18px;
+  }
+
+  .glucose-log-container h2 {
+    font-size: 16px;
+  }
+
+  .diabetes-diagonisis-container p {
+    font-size: 12px;
+  }
+
+  .glucose-log-container {
+    padding: 10px;
+  }
+}

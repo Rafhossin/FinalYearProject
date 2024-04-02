@@ -23,8 +23,8 @@
 
   background-color: #aec8d1;
   border-radius: 20px;
-  box-shadow: white 0px 0px 5px;
-  border: 1px solid white;
+  box-shadow: black 0px 0px 5px;
+  border: 1px solid blue;
 }
 
 .buttons-prediction {
@@ -42,6 +42,7 @@
 }
 
 .why-important {
+  font-size: 25px;
   margin-top: 20px;
   margin-left: 5%;
   font-weight: 700;
@@ -53,6 +54,10 @@
   height: 32px;
   margin-right: 10px;
 }
+.why-important h3 {
+  size: 30px;
+}
+
 .right-container-prediction {
   position: relative;
   background-color: #bb4d4a;
@@ -65,7 +70,7 @@
   align-items: center; /* Add this li
   /* padding-top: 15%; */
   border-radius: 20px;
-  box-shadow: white 0px 0px 2px;
+  box-shadow: black 0px 0px 2px;
 }
 
 .left-container-prediction h1 {

@@ -5,7 +5,7 @@ import UserContext from "../UserContext"; // Path to the UserContext
 import PredictionResults from "../components/PredictionResult";
 import PredictionQuestion from "../components/PredictionQuestion";
 import Header from "../components/Header";
-import "../styles/HeaderStyles.css";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Image1 from "../assets/images/riskTest/weightLoss.png"; // Import the image
@@ -26,10 +26,12 @@ const RiskPredictionTest = () => {
   const navigate = useNavigate();
 
   const { user } = useContext(UserContext); // Get the user data from the UserContext
+  const { setUser } = useContext(UserContext);
+
   console.log("User: ", user);
-  axios.defaults.withCredentials = true;
 
   const [predictionResult, setPredictionResult] = useState(null);
+  axios.defaults.withCredentials = true;
 
   // Verify the user and set the formData(age and gender) when the component mounts
   useEffect(() => {
@@ -71,12 +73,12 @@ const RiskPredictionTest = () => {
     polyphagia: 1,
     polydipsia: 1,
     polyuria: 1,
-    blurredVision: 1,
-    fatigue: 1,
-    slowHealing: 1,
+    visualBlurring: 1,
+    weakness: 1,
+    delayedHealing: 1,
     alopecia: 1,
     itching: 1,
-    irritibility: 1,
+    irritability: 1,
     partialParesis: 1,
   });
 
@@ -134,7 +136,7 @@ const RiskPredictionTest = () => {
         "Visual blurring is significant for predicting diabetes as it can be a symptom of high blood sugar levels affecting the eyes, a condition often associated with diabetes.",
       src: Image6,
       alt: "Blurred Vision icon",
-      type: "blurredVision",
+      type: "visualBlurring",
     },
     {
       symptom:
@@ -143,7 +145,7 @@ const RiskPredictionTest = () => {
         "Irritability can be an important indicator for predicting diabetes, as fluctuations in blood sugar levels can significantly impact mood and emotional stability.",
       src: Image7,
       alt: "Irritibility icon",
-      type: "irritibility",
+      type: "irritability",
     },
     {
       symptom: "Have you been feeling unusually weak or fatigued lately?",
@@ -151,7 +153,7 @@ const RiskPredictionTest = () => {
         "Weakness is a key symptom for predicting diabetes, as it often reflects the body's inefficiency in using glucose for energy due to irregular blood sugar levels",
       src: Image8,
       alt: "Fatigue icon",
-      type: "fatigue",
+      type: "weakness",
     },
     {
       symptom:
@@ -160,7 +162,7 @@ const RiskPredictionTest = () => {
         "Delayed wound healing is important for predicting diabetes because it often indicates poor blood circulation and high blood sugar levels, which can impair the body's natural healing processes.",
       src: Image9,
       alt: "Slow Healing icon",
-      type: "slowHealing",
+      type: "delayedHealing",
     },
     {
       symptom:
@@ -201,12 +203,48 @@ const RiskPredictionTest = () => {
   //       : 1; // Set genderValue as 1 if male, 0 if female
   //   setFormData({ ...formData, gender: genderValue }); // Update formData
   // };
+  // const handleNextPost = async (answer, type) => {
+  //   if (indexQuestion === questions.length - 1) {
+  //     // submit form
+  //     //const result = await callYourMLAlgorithm(formData);
+  //     const result = "positive";
+  //     setPredictionResult(result);
+  //     return;
+  //   }
+  //   setFormData({ ...formData, [type]: answer });
+  //   setIndexQuestion((prevIndex) => prevIndex + 1);
+  // };
+  const submitForm = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/diabetes-prediction",
+        formData
+      );
+
+      // Update the UserContext with the returned user data
+      setUser(response.data.user);
+
+      if (response.status == 200) {
+        console.log("Prediction: ", response.data.prediction);
+        console.log("User: ", response.data.user);
+        setPredictionResult(response.data.prediction);
+      }
+    } catch (error) {
+      if (error.response.status == 500) {
+        console.error("Error submitting form: ", error);
+        return;
+      } else {
+        console.error("Error: ", error);
+      }
+      return;
+    }
+  };
+
   const handleNextPost = async (answer, type) => {
     if (indexQuestion === questions.length - 1) {
       // submit form
-      //const result = await callYourMLAlgorithm(formData);
-      const result = "positive";
-      setPredictionResult(result);
+      setFormData({ ...formData, [type]: answer });
+      await submitForm();
       return;
     }
     setFormData({ ...formData, [type]: answer });

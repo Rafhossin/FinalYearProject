@@ -10,14 +10,14 @@
 }
 
 .diabetes-plate-container h1 {
-  font-size: 24px;
+  font-size: 1.5rem;
   color: white;
   margin-bottom: 16px;
   margin-top: none;
 }
 
 .diabetes-plate-container p {
-  font-size: 16px;
+  font-size: 1.3rem;
   line-height: 1.6;
   margin-top: 16px;
   /* margin-bottom: 16px; */
@@ -34,7 +34,7 @@
 }
 
 .diabetes-plate-container h2 {
-  font-size: 20px;
+  font-size: 1.4rem;
   margin-top: 24px;
   margin-bottom: 8px;
 }

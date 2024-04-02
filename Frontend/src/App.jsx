@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UserContext from "./UserContext";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -22,13 +22,38 @@ import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
 import UpdateProfile from "./pages/UpdateProfile";
 
+import PreDiabetes from "./pages/PreDiabetes";
+import DiagnosingDiabetes from "./pages/DiagnosingDiabetes";
+import DiabetesComplication from "./pages/DiabetesComplication";
+
+import StartCancelPrediction from "./pages/StartCancelPredictionPage";
 import RiskPredictionTest from "./pages/RiskPredictionTest";
 import BMI from "./pages/BMI"; // Import BMI page
+import GlucoseLog from "./pages/GlucoseLog"; // Import Glucose Log page
+import HbA1cPredictionTest from "./pages/HbA1cTest"; // Import HbA1c Test page
+import HealthReport from "./pages/HealthReport"; // Import Medical Report page
 
 // ... other imports for pages
 
 const App = () => {
   const [user, setUser] = useState(null); // // Create user state and Set user state to null
+  // Load user data from localStorage when component mounts
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  // Save user data to localStorage whenever it changes
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [user]);
+
   return (
     // <ChakraProvider>
     <UserContext.Provider value={{ user, setUser }}>
@@ -45,9 +70,17 @@ const App = () => {
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/update-profile" element={<UpdateProfile />} />
 
+          <Route path="/prediabetes" element={<PreDiabetes />} />
+          <Route path="/diagnosing" element={<DiagnosingDiabetes />} />
+          <Route path="/complications" element={<DiabetesComplication />} />
+
           <Route path="/tools-resources" element={<ToolsAndCalculator />} />
+          <Route path="/start-cancelPred" element={<StartCancelPrediction />} />
           <Route path="/risk-test" element={<RiskPredictionTest />} />
           <Route path="/bmi" element={<BMI />} />
+          <Route path="/glucose-log" element={<GlucoseLog />} />
+          <Route path="/HbA1c-test" element={<HbA1cPredictionTest />} />
+          <Route path="/health-report" element={<HealthReport />} />
 
           <Route path="/about-diabetes" element={<AboutDiabetes />} />
           <Route path="/health-wellness" element={<HealthAndWellness />} />

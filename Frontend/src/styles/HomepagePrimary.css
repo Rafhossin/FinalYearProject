@@ -6,15 +6,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* margin-top: 20px; Space below your navbar */
-  /* padding: 2rem; /*Space inside the container*/
+  /* margin-top: 40px; Space below your navbar */
+  /* padding: 1rem; /*Space inside the container */
   /* background-color: #303030; */
 }
 .text-container1 {
   flex-basis: 50%; /* Take up half of the container's width */
   /* Space between the text and image */
   /* padding-left: 4.5rem; Space between the text and the edge of the container */
-  margin-left: 3rem;
+  padding-left: 3rem;
+
   /* margin-right: rem; */
 }
 
@@ -36,13 +37,14 @@
 }
 
 .text-container1 p.subtitle1 {
-  font-size: 1rem; /* Adjust the font size as necessary */
+  font-size: 1.3rem; /* Adjust the font size as necessary */
   margin-bottom: 2rem; /* Space above the button */
   color: white;
 }
 
 .text-container1 button {
   padding: 1.5rem; /* Padding inside the button */
+  font-size: 1.3rem; /* Font size of the button text */
   background-color: white; /* Background color of the button */
   color: #303030; /* Text color of the button */
   border: none; /* No border */
@@ -69,7 +71,8 @@
 .image-container1 img {
   width: 100%; /* Responsive image size */
   height: auto; /* Maintain aspect ratio */
-  max-height: 500px; /*Limit the height*/
+  /* max-height: 630px; Limit the height */
+  max-height: 550px;
   object-fit: cover;
   border-radius: none; /* Rounded corners for the image */
 }

@@ -30,7 +30,8 @@ const homePage = () => {
 
   // Function to handle the button click
   const handleRiskTestClick = () => {
-    navigate("/risk-test"); // Navigate to the Risk Test page
+    // navigate("/risk-test"); // Navigate to the Risk Test page
+    navigate("/start-cancelPred"); // Navigate to the Start cancel Prediction page
   };
 
   // Function to handle the button click

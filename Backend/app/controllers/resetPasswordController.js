@@ -6,7 +6,17 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const resetPasswordController = async (req, res) => {
-  const { token } = req.params;
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    return res
+      .status(401)
+      .json({ message: "Authorization header is required" });
+  }
+
+  const token = authHeader.split(" ")[1]; // Bearer <token>
+
+  // const { token } = req.params;
   const { password } = req.body;
 
   if (!password || password.trim() === "") {

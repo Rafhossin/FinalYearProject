@@ -80,7 +80,7 @@
 }
 
 .text-container1 p.subtitle1 {
-  font-size: 1rem; /* Adjust the font size as necessary */
+  font-size: 1.3rem; /* Adjust the font size as necessary */
   margin-bottom: 2rem; /* Space above the button */
   color: white;
 }
@@ -93,7 +93,7 @@
 
 .diabetes-text p,
 .diabetes-text ul {
-  font-size: 1rem; /* Adjust the font size as necessary */
+  font-size: 1.3rem; /* Adjust the font size as necessary */
   margin-bottom: 2rem; /* Space above the button */
   color: white;
 }
@@ -146,13 +146,14 @@
 }
 
 .risk-text p {
-  font-size: 1rem; /* Adjust the font size as necessary */
+  font-size: 1.3rem; /* Adjust the font size as necessary */
   margin-bottom: 2rem; /* Space above the button */
   color: white;
 }
 
 .risk-text button {
   padding: 1.5rem; /* Padding inside the button */
+  font-size: 1.3rem; /* Adjust the font size as necessary */
   background-color: white; /* Background color of the button */
   color: "#303030"; /* Text color of the button */
   border: none; /* No border */

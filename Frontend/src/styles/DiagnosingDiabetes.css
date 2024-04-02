@@ -1,0 +1,127 @@
+/* DiabetesPlateContainer.css/ Contact.css */
+
+.diabetes-diagonisis-container {
+  /* font-family: "Arial", sans-serif; */
+  padding: 100px;
+  background-color: #f9f9f9;
+  color: black;
+  max-width: auto; /* Maximum width of the container */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+.diabetes-diagonisis-container h1 {
+  font-size: 24px;
+  color: black;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.diabetes-diagonisis-container p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-top: 16px;
+  /* margin-bottom: 16px; */
+}
+
+.diabetes-diagonisis-container img {
+  display: block;
+  width: 20%;
+  height: 30%;
+  margin: 50px auto 50px auto;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4); /* Horizontal offset, vertical offset, blur radius, and color */
+}
+.A1C {
+  padding: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: 1px solid #bb4d4a;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4); /* Horizontal offset, vertical offset, blur radius, and color */
+}
+
+.diabetes-diagonisis-container h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+.main-container ul {
+  list-style-position: inside; /* Ensures the bullets are inside the padding area */
+  padding-left: 40px; /* This will move the entire list, including bullets, to the right */
+}
+
+.table-section1,
+.table-section2,
+.table-section3 {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.table-section1 table,
+.table-section2 table,
+.table-section3 table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-section1 th,
+.table-section1 td,
+.table-section2 th,
+.table-section2 td,
+.table-section3 th,
+.table-section3 td {
+  border: 1px solid #d7d0d0;
+  padding: 8px;
+  text-align: left;
+}
+
+.table-section1 th,
+.table-section2 th,
+.table-section3 th {
+  background-color: #e9e4e4;
+  color: black;
+}
+.pre-diabetes,
+.symptoms,
+.prevention {
+  padding-bottom: 20px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .diabetes-diagonisis-container h1 {
+    font-size: 20px;
+  }
+
+  .diabetes-diagonisis-container h2 {
+    font-size: 18px;
+  }
+
+  .diabetes-diagonisis-container p {
+    font-size: 14px;
+  }
+
+  .diabetes-diagonisis-container {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .diabetes-diagonisis-container h1 {
+    font-size: 18px;
+  }
+
+  .diabetes-diagonisis-container h2 {
+    font-size: 16px;
+  }
+
+  .diabetes-diagonisis-container p {
+    font-size: 12px;
+  }
+
+  .diabetes-diagonisis-container {
+    padding: 10px;
+  }
+}
