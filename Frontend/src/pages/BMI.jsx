@@ -72,16 +72,16 @@ const BMI = () => {
     setShowResultBox(false); // Hide the result box initially
 
     if (unitSystem === "metric") {
-      if (!heightCentimeter || weight < 40) {
+      if (!heightCentimeter || heightCentimeter < 91.44 || weight < 40) {
         setEmptyFieldErrorMessage(
-          "Please fill in all fields correctly. Weight must be at least 40 kg in the metric system."
+          "Please fill in all fields correctly. Height must be at least 91.44 cm and weight must be at least 40 kg in the metric system."
         );
         return;
       }
     } else if (unitSystem === "imperial") {
-      if (!heightFeet || weight < 88) {
+      if (!heightFeet || heightFeet < 3 || weight < 88) {
         setEmptyFieldErrorMessage(
-          "Please fill in all fields correctly. Weight must be at least 88 lbs in the imperial system."
+          "Please fill in all fields correctly. Height must be at least 3 ft and weight must be at least 88 lbs in the imperial system."
         );
         return;
       }

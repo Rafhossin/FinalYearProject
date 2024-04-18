@@ -45,10 +45,32 @@ const HealthReport = () => {
   const [pdfUrl, setPdfUrl] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
+  const [pageNumber, setPageNumber] = useState(1);
+  const [numPages, setNumPages] = useState(null);
+  const [showPagination, setShowPagination] = useState(false); // State to control pagination visibility
+
+  // const onDocumentLoadSuccess = ({ numPages }) => {
+  //   setNumPages(numPages);
+  // };
+
+  // const goToPreviousPage = () => {
+  //   setPageNumber((prevPageNum) => Math.max(prevPageNum - 1, 1));
+  // };
+
+  // const goToNextPage = () => {
+  //   setPageNumber((prevPageNum) => Math.min(prevPageNum + 1, numPages));
+  // };
+
+  useEffect(() => {
+    if (pageNumber < 1) setPageNumber(1);
+    else if (pageNumber > numPages) setPageNumber(numPages);
+  }, [pageNumber, numPages]);
+
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
   const generatePDF = (user) => {
+    setShowPagination(false); // Disable pagination controls while generating PDF
     const documentDefinition = {
       pageSize: { width: 1000, height: 800 },
       content: [
@@ -98,7 +120,80 @@ const HealthReport = () => {
             ],
           },
         },
+        { text: "HbA1c Readings", style: "subheader" },
+        {
+          table: {
+            widths: ["*", "*"],
+            body: [
+              [
+                { text: "HbA1c Value", style: "text" },
+                { text: "Date", style: "text" },
+              ],
+              ...user.health_profile.HbA1c_readings.map((reading) => [
+                { text: `${reading.HbA1c_value}%`, style: "table" },
+                {
+                  text: new Date(reading.date_time).toLocaleDateString(),
+                  style: "table",
+                },
+              ]),
+            ],
+          },
+        },
+        { text: "HbA1c Assessment Results", style: "subheader" }, // New section header
+        {
+          table: {
+            widths: ["*", "*"],
+            body: [
+              [
+                { text: "Date", style: "text" },
+                { text: "Risk Score", style: "text" },
+              ],
+              ...user.health_profile.HbA1c_assessment_result.map((result) => [
+                {
+                  text: new Date(result.assessment_date).toLocaleDateString(),
+                  style: "table",
+                },
+                { text: result.risk_score, style: "table" }, // Assuming 'risk_score' is the field you want to display
+              ]),
+            ],
+          },
+        },
+        { text: "Diabetes Assessment Results", style: "subheader" },
+        {
+          table: {
+            widths: ["*", "*"],
+            body: [
+              [
+                { text: "Date", style: "text" },
+                { text: "Prediction Result", style: "text" },
+              ],
+              ...user.health_profile.assessment_result.map((result) => [
+                {
+                  text: new Date(result.assessment_date).toLocaleDateString(),
+                  style: "table",
+                },
+                { text: result.diabetes_prediction_result, style: "table" },
+              ]),
+            ],
+          },
+        },
+        { text: "Ethical Acknowledgement", style: "subheader" }, // New Ethical Acknowledgement Section
+        {
+          text: [
+            {
+              text: "All data contained within this report is treated with the utmost confidentiality and respect for the privacy of the individual. This report is intended for the personal use of the individual only and may not be distributed without explicit consent from the subject.\n\n",
+            },
+            {
+              text: "By using this report, you agree to maintain the confidentiality of the information contained herein and to use it only for the purposes intended by your healthcare provider.\n\n",
+            },
+            {
+              text: "This report does not substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health providers with any questions you may have regarding a medical condition.\n\n",
+            },
+          ],
+          style: "text",
+        },
       ],
+
       styles: {
         header1: {
           fontSize: 30, // Increased font size
@@ -141,6 +236,7 @@ const HealthReport = () => {
       .getBlob((blob) => {
         // Create a new blob URL and update the state
         setPdfUrl(URL.createObjectURL(blob));
+        setShowPagination(true);
       })
       .catch((error) => {
         console.error("Error generating PDF blob: ", error);
@@ -183,6 +279,7 @@ const HealthReport = () => {
       }
       if (response.status == 200) {
         generatePDF(userData);
+        setIsPdfGenerated(true);
       }
     } catch (error) {
       if (error.response.status == 500) {
@@ -190,11 +287,13 @@ const HealthReport = () => {
         setServerError(
           "An error occurred while trying to generate your health report. Please try again later."
         );
+        setShowPagination(false); // Ensure pagination controls are hidden on error
       } else {
         console.error("Failed to fetch user data:", error);
         setServerError(
           "An error occurred while trying to generate your health report. Please try again later."
         );
+        setShowPagination(false); // Ensure pagination controls are hidden on error
       }
     } finally {
       setIsGenerating(false);
@@ -205,7 +304,7 @@ const HealthReport = () => {
     <>
       <div className="main-container">
         <Header
-          headingTitle1={"Tools& Resources"}
+          headingTitle1={"Tools & Resources"}
           headingTitle2={"Your Health Report"}
           headerColor={"#008080"}
         />
@@ -220,21 +319,53 @@ const HealthReport = () => {
           color={"#D0E1EE"}
         />
 
-        {/* New container for Diabetes Plate Method */}
         <div className="glucose-log-container">
           <div className="target-range">
             <h1>Your Medical Report:</h1>
             <div className="glucose-meter">
               <div className="dp1">
-                {console.log(pdfUrl)}
                 {pdfUrl && (
-                  <Document file={pdfUrl}>
+                  <Document
+                    file={pdfUrl}
+                    onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                  >
                     <Page
-                      pageNumber={1}
+                      pageNumber={pageNumber}
                       renderTextLayer={false}
                       renderAnnotationLayer={false}
                     />
                   </Document>
+                )}
+                {showPagination && (
+                  <ChakraProvider>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "300px", // Adjust this value as needed
+                        margin: "20px auto",
+                      }}
+                    >
+                      <Button
+                        colorScheme="teal"
+                        size="sm"
+                        onClick={() => setPageNumber(pageNumber - 1)}
+                        disabled={pageNumber <= 1}
+                      >
+                        Previous
+                      </Button>
+                      <p>{`Page ${pageNumber} of ${numPages}`}</p>
+                      <Button
+                        colorScheme="teal"
+                        size="sm"
+                        onClick={() => setPageNumber(pageNumber + 1)}
+                        disabled={pageNumber >= numPages}
+                      >
+                        Next
+                      </Button>
+                    </div>
+                  </ChakraProvider>
                 )}
                 <ChakraProvider>
                   {successMessage && (
@@ -258,7 +389,6 @@ const HealthReport = () => {
                       {serverError}
                     </Alert>
                   )}
-
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <Button
                       colorScheme="teal"
@@ -270,13 +400,12 @@ const HealthReport = () => {
                     >
                       Generate PDF
                     </Button>
-
                     <Button
                       colorScheme="teal"
                       size="lg"
                       mt={4}
                       mb={8}
-                      onClick={handleSaveReport} // This should probably be a different function for emailing the report
+                      onClick={handleSaveReport}
                     >
                       Save The Report
                     </Button>

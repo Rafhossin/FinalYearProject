@@ -42,63 +42,91 @@ const HbA1cPredictionTest = () => {
     existingGlucoseReadings = user.health_profile.glucose_readings;
   }
 
+  //print the existing glucose readings length
+  console.log("Existing Glucose Readings: ", existingGlucoseReadings.length);
+
   console.log("Existing Glucose Readings: ", existingGlucoseReadings);
 
-  const [glucoseReadings, setGlucoseReadings] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage1, setErrorMessage1] = useState("");
 
   const [successMessage, setSuccessMessage] = useState("");
-  const [glucoseReading, setGlucoseReading] = useState("");
+  const [predictedHbA1c, setPredictedHbA1c] = useState(null); // State for predicted HbA1c
 
   // Function to handle the button click
   const handleHealthReport = () => {
-    navigate("/health-report"); // Navigate to the Risk Test page
+    if (
+      user &&
+      !user.health_profile &&
+      user.health_profile.length === 0 &&
+      user.health_profile.glucose_readings.length === 0 &&
+      user.health_profile.HbA1c_readings.length === 0
+    ) {
+      setErrorMessage1(
+        "Health profile is empty or incomplete. Please add some data."
+      );
+      return;
+    } else {
+      navigate("/health-report"); // Navigate to the Risk Test page
+    }
+  };
+
+  const generateHbA1cMessage = () => {
+    if (!predictedHbA1c) {
+      return "Awaiting HbA1c prediction..."; // Default message
+    }
+    if (predictedHbA1c >= 6.5) {
+      return "Your HbA1c level is 6.5% or above, indicating that your blood sugar has been consistently higher than the recommended levels over the past few months. It's important to discuss these results with your healthcare provider. They can help you with strategies to lower your HbA1c, such as adjustments in diet, exercise, medication, or other lifestyle changes to reduce the risk of diabetes complications.";
+    } else if (predictedHbA1c >= 5.7) {
+      return "Your HbA1c level is between 5.7% and 6.4%, indicating that your blood sugar levels are higher than normal but not high enough to be diagnosed as diabetes. It's important to discuss these results with your healthcare provider. They can help you with strategies to lower your HbA1c, such as adjustments in diet, exercise, medication, or other lifestyle changes to reduce the risk of developing diabetes.";
+    } else {
+      return "Your HbA1c level is below 5.7%, indicating that your blood sugar levels are within the normal range. Continue maintaining a healthy lifestyle to keep your blood sugar levels in check.";
+    }
   };
 
   const handleHbA1cPrediction = async () => {
-    if (readingsForToday.length > 2) {
-      setErrorMessage("You can input at most 3 readings per day.");
+    // Check if the user has enough readings
+    if (existingGlucoseReadings.length < 20) {
+      setErrorMessage(
+        "Not enough glucose readings available. Exactly 20 readings are required."
+      );
       return;
     }
-    if (glucoseReading === "") {
-      setErrorMessage("Please enter a glucose reading");
-      return;
-    } else if (glucoseReading < 0) {
-      setErrorMessage("Glucose reading cannot be negative");
-      return;
-    }
-    // Create a new reading object
-    const newReading = {
-      date: currentDate,
-      time: currentTime,
-      reading: glucoseReading,
-    };
 
-    console.log(newReading);
     try {
-      const response = await axios.post("http://localhost:3000/api/glucose", {
-        date: newReading.date,
-        time: newReading.time,
-        reading: newReading.reading,
-      });
+      const userId = user._id; // Ensure the user object has the `_id` field available
+
+      const response = await axios.post(
+        "http://localhost:3000/api/hba1c-prediction",
+        {
+          userId: userId,
+        }
+      );
+
+      console.log("API Response:", response);
       // Update the UserContext with the returned user data
       setUser(response.data.user);
 
-      const data = response.data;
+      if (response.status == 200) {
+        console.log("HbA1c prediction successful");
+        console.log(response.data);
+        setPredictedHbA1c(response.data.predicted_hba1c); // Update the predicted HbA1c state
+        // Display the success message with the predicted HbA1c
+        setSuccessMessage(`Predicted HbA1c: ${response.data.predicted_hba1c}`);
+      }
       if (response.status == 404) {
         console.log("User does not exist, please input the correct user Id.");
-        // Redirect the user to the login page
+        return;
       }
-      if (response.status == 200) {
-        console.log(data.result);
-        console.log(data.message);
-        // Redirect the user to the login page
-        setSuccessMessage(data.message);
+      if (response.status !== 200) {
+        setErrorMessage(
+          "We encountered an issue while trying to fetch your HbA1c prediction. Please try again later."
+        );
+        return;
       }
       if (data.success) {
         // The sign up was successful, continue with the sign up process
         console.log(response.data);
-        // Log Employee Id
       }
     } catch (error) {
       if (error.response.status == 500) {
@@ -109,9 +137,6 @@ const HbA1cPredictionTest = () => {
       }
       return;
     }
-
-    setGlucoseReadings([...glucoseReadings, newReading]);
-    setGlucoseReading("");
   };
 
   return (
@@ -133,7 +158,6 @@ const HbA1cPredictionTest = () => {
           color={"#D0E1EE"}
         />
 
-        {/* New container for Diabetes Plate Method */}
         <div className="glucose-log-container">
           <div className="mgLevel">
             <h1>What does HbA1c mean?</h1>
@@ -193,15 +217,9 @@ const HbA1cPredictionTest = () => {
                     </Alert>
                   )}
                 </ChakraProvider>
-                <p>
-                  Your HbA1c level is 6.5% or above, indicating that your blood
-                  sugar has been consistently higher than the recommended levels
-                  over the past few months. It's important to discuss these
-                  results with your healthcare provider. They can help you with
-                  strategies to lower your HbA1c, such as adjustments in diet,
-                  exercise, medication, or other lifestyle changes to reduce the
-                  risk of diabetes complications.
-                </p>
+                <div>
+                  <p>{generateHbA1cMessage()}</p>
+                </div>
               </div>
             </div>
 
@@ -210,7 +228,7 @@ const HbA1cPredictionTest = () => {
               <div className="dp1">
                 <p>To view your Health report click the button below</p>
                 <ChakraProvider>
-                  {errorMessage && (
+                  {errorMessage1 && (
                     <Alert
                       status="error"
                       variant="left-accent"
@@ -218,7 +236,7 @@ const HbA1cPredictionTest = () => {
                       marginTop="40px"
                     >
                       <AlertIcon />
-                      {errorMessage}
+                      {errorMessage1}
                     </Alert>
                   )}
                   <Button

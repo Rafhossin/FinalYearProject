@@ -6,6 +6,7 @@ import healthierImage from "../assets/images/infoButtonPages/healthier.jpeg"; //
 import ToolsCalPrimary from "../components/ToolsCalPrimary";
 import ToolsCalSecondary from "../components/ToolsCalSecondary";
 import "../styles/InformationContainer.css"; // Path to CSS file
+import BackToTop from "../components/BackToTop";
 
 const PreDiabetes = () => {
   const navigate = useNavigate(); // Create the navigate function
@@ -74,6 +75,7 @@ const PreDiabetes = () => {
           bgcolor={"#387b82"}
         />
       </div>
+      <BackToTop />
     </>
   );
 };

@@ -49,8 +49,13 @@ const user = new Schema(
       assessment_result: [
         {
           assessment_date: { type: Date, default: Date.now },
-          risk_score: { type: String, default: "" },
           diabetes_prediction_result: { type: String, default: "" },
+        },
+      ],
+      HbA1c_assessment_result: [
+        {
+          assessment_date: { type: Date, default: Date.now },
+          risk_score: { type: String, default: "" },
         },
       ],
     },

@@ -1,0 +1,20 @@
+.back-to-top {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  bottom: 50px;
+  right: 30px;
+  background-color: #555;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1000;
+  transition: background-color 0.3s, opacity 0.5s;
+  /* Removed visibility and set initial opacity to ensure it's fully hidden initially */
+  opacity: 0; /* Make it fully transparent initially */
+}
+
+.back-to-top:hover {
+  opacity: 1;
+  background-color: #333;
+}

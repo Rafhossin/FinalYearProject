@@ -3,9 +3,41 @@ from flask_cors import CORS
 import pickle
 import pandas as pd
 import numpy as np
+from tensorflow.keras.models import load_model
+import pickle
 
 app = Flask(__name__)
 CORS(app)
+
+
+# Load the glucose scaler
+with open('glucose_scaler.pkl', 'rb') as f:
+    scaler_glucose = pickle.load(f)
+
+# Load the HbA1c model
+model_hba1c = load_model('A1c_model.h5')
+
+@app.route("/predict-hba1c", methods=["POST"])
+def predict_hba1c():
+    try:
+        data = request.get_json(force=True)
+        glucose_readings = data['readings']
+        
+        if len(glucose_readings) != 20:
+            return jsonify({"error": "Exactly 20 glucose readings are required."}), 400
+        
+        glucose_array = np.array(glucose_readings).reshape(-1, 1)  # Correct reshaping before scaling
+        glucose_array = scaler_glucose.transform(glucose_array)  # Scaling
+        glucose_array = glucose_array.reshape(1, 20, 1)  # Reshape for LSTM
+
+        prediction = model_hba1c.predict(glucose_array)
+        predicted_hba1c = prediction.flatten()[0]
+
+        
+
+        return jsonify({"predicted_hba1c": round(float(predicted_hba1c), 2)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 # Load the model
@@ -16,6 +48,8 @@ with open("scaler.pkl", "rb") as file:
     scaler = pickle.load(file)
 
 @app.route("/predict", methods=["POST"])
+
+
 
 def predict():
     # Get data from the request
