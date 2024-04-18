@@ -106,7 +106,7 @@ const homePage = () => {
           <h2>Are You At Risk Of Type 2 Diabetes?</h2>
           <p>
             Learning your risk is the first step in taking action against type 2
-            diabetes. Take our 60-Second Type 2 Diabetes Prediction Test today
+            diabetes. Take our 2 minutes Type 2 Diabetes Prediction Test today
             to receive actionable next steps in your health journey.
           </p>
           <button
