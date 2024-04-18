@@ -14,6 +14,7 @@ import "../styles/HomepageStyles.css"; // Path to CSS file
 import InfoButtons from "../components/InfoButtons";
 import HomepagePrimary from "../components/HomepagePrimary";
 import HomepageSecondary from "../components/HomepageSecondary";
+import BackToTop from "../components/BackToTop";
 
 const homePage = () => {
   const { user } = useContext(UserContext);
@@ -165,6 +166,9 @@ const homePage = () => {
         onClick={handleToolsResourcesClick} // Pass the navigation function to the onClick prop
         color={"black"}
       />
+      <div>
+        <BackToTop />
+      </div>
     </>
   );
 };

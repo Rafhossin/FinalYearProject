@@ -43,6 +43,7 @@ import DiabetesComPrimary from "../components/DiabetesComPrimary";
 // import "../styles/DiabetesComplication.css"; // Path to CSS file
 
 import "../styles/GlucoseLog.css"; // Path to CSS file
+import BackToTop from "../components/BackToTop";
 
 const GlucoseLog = () => {
   const navigate = useNavigate();
@@ -131,13 +132,11 @@ const GlucoseLog = () => {
       const data = response.data;
       if (response.status == 404) {
         console.log("User does not exist, please input the correct user Id.");
-
-        // Redirect the user to the login page
       }
       if (response.status == 200) {
         console.log(data.result);
         console.log(data.message);
-        // Redirect the user to the login page
+
         setSuccessMessage2(data.message);
       }
       if (data.success) {
@@ -670,6 +669,9 @@ const GlucoseLog = () => {
           color={"#D0E1EE"}
           onClick={handleHbA1cTestClick} // Pass the navigation function to the onClick prop
         />
+      </div>
+      <div>
+        <BackToTop />
       </div>
     </>
   );

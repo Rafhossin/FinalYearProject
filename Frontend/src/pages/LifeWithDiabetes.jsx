@@ -11,6 +11,7 @@ import ToolsCalPrimary from "../components/ToolsCalPrimary";
 import ToolsCalSecondary from "../components/ToolsCalSecondary";
 import LifeWithDiabetesPrimary from "../components/LifeWithDiabetesPrimary";
 import "../styles/InformationContainer.css"; // Path to CSS file
+import BackToTop from "../components/BackToTop";
 
 const LifeWithDiabetes = () => {
   const navigate = useNavigate(); // Create the navigate function
@@ -95,6 +96,7 @@ const LifeWithDiabetes = () => {
           bgcolor={"#008080"}
         />
       </div>
+      <BackToTop />
     </>
   );
 };

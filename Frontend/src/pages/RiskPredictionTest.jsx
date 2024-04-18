@@ -184,36 +184,6 @@ const RiskPredictionTest = () => {
     },
   ];
 
-  // const calculateAge = () => {
-  //   const dob = new Date(user.date_of_birth); // Convert date_of_birth to a Date object
-
-  //   const diff_ms = Date.now() - dob.getTime();
-  //   const age_dt = new Date(diff_ms);
-  //   const age = Math.abs(age_dt.getUTCFullYear() - 1970);
-  //   setFormData({ ...formData, age: age }); // Update formData with age
-  // };
-
-  // const fetchGender = () => {
-  //   const fetchedGender = user.gender; // Get gender from user
-  //   console.log("fetchGender: ", fetchedGender);
-  //   const genderValue =
-  //     typeof fetchedGender === "string" &&
-  //     fetchedGender.trim().toLowerCase() === "male"
-  //       ? 0
-  //       : 1; // Set genderValue as 1 if male, 0 if female
-  //   setFormData({ ...formData, gender: genderValue }); // Update formData
-  // };
-  // const handleNextPost = async (answer, type) => {
-  //   if (indexQuestion === questions.length - 1) {
-  //     // submit form
-  //     //const result = await callYourMLAlgorithm(formData);
-  //     const result = "positive";
-  //     setPredictionResult(result);
-  //     return;
-  //   }
-  //   setFormData({ ...formData, [type]: answer });
-  //   setIndexQuestion((prevIndex) => prevIndex + 1);
-  // };
   const submitForm = async () => {
     try {
       const response = await axios.post(

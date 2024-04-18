@@ -4,6 +4,7 @@ import complecationImage from "../assets/images/infoButtonPages/complecation.web
 
 import DiabetesComPrimary from "../components/DiabetesComPrimary";
 import "../styles/DiabetesComplication.css"; // Path to CSS file
+import BackToTop from "../components/BackToTop";
 
 const DiabetesComplication = () => {
   return (
@@ -110,6 +111,7 @@ const DiabetesComplication = () => {
           </div>
         </div>
       </div>
+      <BackToTop />
     </>
   );
 };

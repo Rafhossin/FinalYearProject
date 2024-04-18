@@ -6,6 +6,7 @@ import FPGImage from "../assets/images/infoButtonPages/FPG.png"; // Path to imag
 import OGTTImage from "../assets/images/infoButtonPages/OGTT.png"; // Path to image
 
 import "../styles/DiagnosingDiabetes.css"; // Path to CSS file
+import BackToTop from "../components/BackToTop";
 
 const DiagnosingDiabetes = () => {
   return (
@@ -215,6 +216,8 @@ const DiagnosingDiabetes = () => {
           </div>
         </div>
       </div>
+
+      <BackToTop />
     </>
   );
 };

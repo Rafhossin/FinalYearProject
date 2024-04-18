@@ -10,6 +10,8 @@ import updateBMIHeightWeightRoutes from "./routes/updateBMIHeightWeightRoutes.js
 
 import diabetesPredictionRoutes from "./routes/diabetesPredictionRoutes.js"; // import diabetes prediction routes
 
+import hba1cPredictionRoutes from "./routes/hbA1cPredictionRoutes.js"; // import hba1c prediction routes
+
 import glucoseMonitorRoutes from "./routes/glucoseMonitorRoutes.js"; // import glucose monitor routes
 
 import deleteGlucoseReadingRoutes from "./routes/deleteGlucoseReadingRoutes.js"; // import delete glucose reading routes
@@ -46,6 +48,7 @@ app.use("/api/profile", updateProfileRoutes); // use update profile routes
 app.use("/api", updateBMIHeightWeightRoutes); // use update BMI, height, weight routes
 app.use("/api", glucoseMonitorRoutes); // use glucose monitor routes
 app.use("/api", diabetesPredictionRoutes); // use diabetes prediction routes
+app.use("/api", hba1cPredictionRoutes); // use hba1c prediction routes
 app.use("/api", userHealthReportRoutes); // use user health report routes
 app.use("/api", deleteGlucoseReadingRoutes); // use delete glucose reading routes
 app.use("/api", forgotPassRoutes); // use forgot password routes
