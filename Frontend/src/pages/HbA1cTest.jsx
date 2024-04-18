@@ -73,7 +73,7 @@ const HbA1cPredictionTest = () => {
 
   const generateHbA1cMessage = () => {
     if (!predictedHbA1c) {
-      return "Awaiting HbA1c prediction..."; // Default message
+      return ""; // Default message
     }
     if (predictedHbA1c >= 6.5) {
       return "Your HbA1c level is 6.5% or above, indicating that your blood sugar has been consistently higher than the recommended levels over the past few months. It's important to discuss these results with your healthcare provider. They can help you with strategies to lower your HbA1c, such as adjustments in diet, exercise, medication, or other lifestyle changes to reduce the risk of diabetes complications.";
