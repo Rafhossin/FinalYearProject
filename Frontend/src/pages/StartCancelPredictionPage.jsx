@@ -5,6 +5,7 @@ import axios from "axios";
 import Header from "../components/Header";
 import PredictionTest from "../assets/images/riskTest/PredictionTest.webp"; // Import the image
 import StartCancelPredComponent from "../components/StartCancelPrediction";
+import { serverEndpoint } from "../config/constants";
 
 const StartCancelPrediction = () => {
   let navigate = useNavigate();
@@ -13,7 +14,7 @@ const StartCancelPrediction = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/verifyUser")
+      .get(`${serverEndpoint}/api/verifyUser`)
       .then((res) => {
         if (res.status == 200) {
           console.log("User is verified");

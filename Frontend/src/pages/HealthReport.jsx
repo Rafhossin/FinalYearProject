@@ -11,6 +11,7 @@ import Header from "../components/Header";
 import DiabetesComPrimary from "../components/DiabetesComPrimary";
 import "../styles/GlucoseLog.css";
 import { Document, Page, pdfjs } from "react-pdf";
+import { serverEndpoint } from "../config/constants";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -24,7 +25,7 @@ const HealthReport = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/verifyUser")
+      .get(`${serverEndpoint}/api/verifyUser`)
       .then((res) => {
         if (res.status == 200) {
           console.log("User is verified");
@@ -266,9 +267,7 @@ const HealthReport = () => {
     setIsGenerating(true);
 
     try {
-      const response = await axios.get(
-        "http://localhost:3000/api/health-report"
-      );
+      const response = await axios.get(`${serverEndpoint}/api/health-report`);
       const userData = response.data.user;
       setUser(userData);
 

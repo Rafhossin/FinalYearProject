@@ -12,6 +12,7 @@ import DiabetesComPrimary from "../components/DiabetesComPrimary";
 // import "../styles/DiabetesComplication.css"; // Path to CSS file
 
 import "../styles/GlucoseLog.css"; // Path to CSS file
+import { serverEndpoint } from "../config/constants";
 
 const HbA1cPredictionTest = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const HbA1cPredictionTest = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/verifyUser")
+      .get(`${serverEndpoint}/api/verifyUser`)
       .then((res) => {
         if (res.status == 200) {
           console.log("User is verified");
@@ -97,7 +98,7 @@ const HbA1cPredictionTest = () => {
       const userId = user._id; // Ensure the user object has the `_id` field available
 
       const response = await axios.post(
-        "http://localhost:3000/api/hba1c-prediction",
+        `${serverEndpoint}/api/hba1c-prediction`,
         {
           userId: userId,
         }

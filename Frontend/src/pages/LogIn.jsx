@@ -7,6 +7,7 @@ import { Input, Button, InputGroup, InputRightElement } from "@chakra-ui/react";
 import "../styles/LoginStyles.css";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import UserContext from "../UserContext"; // Import UserContext
+import { serverEndpoint } from "../config/constants";
 
 const SignIn = () => {
   const { setUser } = useContext(UserContext); // Access setUser from UserContext
@@ -40,13 +41,10 @@ const SignIn = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/signin",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post(`${serverEndpoint}/api/auth/signin`, {
+        email,
+        password,
+      });
 
       const data = response.data;
       if (response.status === 200 && data.token) {

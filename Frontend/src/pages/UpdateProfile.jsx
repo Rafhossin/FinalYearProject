@@ -22,6 +22,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import "../styles/UpdateProfileStyles.css";
 import Header from "../components/Header"; // Path to the contact component
+import { serverEndpoint } from "../config/constants";
 
 const UpdateProfile = () => {
   const [email, setEmail] = useState("");
@@ -71,7 +72,7 @@ const UpdateProfile = () => {
     if (!validate(email, "")) {
       try {
         const response = await axios.put(
-          "http://localhost:3000/api/profile/update-profile",
+          `${serverEndpoint}/api/profile/update-profile`,
           {
             email,
             userId: user._id, // Include the user id in the request body
@@ -122,7 +123,7 @@ const UpdateProfile = () => {
     if (!validate("", password)) {
       try {
         const response = await axios.put(
-          "http://localhost:3000/api/profile/update-profile",
+          `${serverEndpoint}/api/profile/update-profile`,
           { password, userId: user._id },
           {
             headers: {

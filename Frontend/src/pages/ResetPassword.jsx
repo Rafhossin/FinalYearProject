@@ -18,6 +18,7 @@ import {
 import "../styles/ResetPasswordStyles.css";
 import Header from "../components/Header"; // Path to the contact component
 import { useParams } from "react-router-dom";
+import { serverEndpoint } from "../config/constants";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -64,7 +65,7 @@ const ResetPassword = () => {
       //   }
       // );
       const response = await axios.put(
-        `http://localhost:3000/api/reset-password`,
+        `${serverEndpoint}/api/reset-password`,
         {
           password,
         },

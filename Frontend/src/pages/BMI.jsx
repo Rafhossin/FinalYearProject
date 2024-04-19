@@ -7,6 +7,7 @@ import BmiImage from "../assets/images/calcpage/bmiCal.jpeg"; // Path to  image
 
 import BmiComponent from "../components/BmiComponent";
 import { ChakraProvider, Alert, AlertIcon } from "@chakra-ui/react";
+import { serverEndpoint } from "../config/constants";
 
 import {
   NumberInput,
@@ -26,7 +27,7 @@ const BMI = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/verifyUser")
+      .get(`${serverEndpoint}/api/verifyUser`)
       .then((res) => {
         if (res.status == 200) {
           console.log("User is verified");
@@ -129,7 +130,7 @@ const BMI = () => {
     }
 
     try {
-      const response = await axios.put("http://localhost:3000/api/bmi", {
+      const response = await axios.put(`${serverEndpoint}/api/bmi`, {
         bmi,
         height: totalHeightInMeters,
         weight,
