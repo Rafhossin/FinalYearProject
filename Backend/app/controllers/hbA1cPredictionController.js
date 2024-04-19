@@ -33,22 +33,18 @@ export const hbA1cPredictionController = async (req, res) => {
 
     console.log("Glucose Readings: ", glucoseReadings);
 
-    // // Check if there are enough readings and send them back even if there aren't
-    // if (glucoseReadings.length < 20) {
-    //   return res.status(400).json({
-    //     status: 400,
-    //     message: "Insufficient glucose readings. At least 20 readings are required for accurate prediction.",
-    //     readings: glucoseReadings // send the available readings to the client
-    //   });
-    //}
-
     // Proceed with sending readings to the Flask API for prediction
-    const response = await axios.post("http://127.0.0.1:5000//predict-hba1c", {
-      readings: glucoseReadings,
-    });
+    const response = await axios.post(
+      "https://aibetic2-75e99e1607a5.herokuapp.com/predict-hba1c",
+      {
+        readings: glucoseReadings,
+      }
+    );
 
     // Determine the risk factor based on the predicted HbA1c value
     const riskFactor = determineRiskFactor(response.data.predicted_hba1c);
+
+    console.log("Predicted HbA1c:---------- ", response.data.predicted_hba1c);
 
     // Save the prediction result in the user model
     user.health_profile.HbA1c_readings.push({

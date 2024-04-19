@@ -26,6 +26,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+
+app.set("trust proxy", 1); // trust first proxy
 //middleware function
 app.use(
   cors({
