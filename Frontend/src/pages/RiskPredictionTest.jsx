@@ -21,6 +21,7 @@ import Image10 from "../assets/images/riskTest/hairLoss.png"; // Import the imag
 import Image11 from "../assets/images/riskTest/itching.png"; // Import the image
 import HighRisk from "../assets/images/riskTest/highRisk.png"; // Import the image
 import LowRisk from "../assets/images/riskTest/lowRisk.png"; // Import the image
+import { serverEndpoint } from "../config/constants";
 
 const RiskPredictionTest = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const RiskPredictionTest = () => {
   // Verify the user and set the formData(age and gender) when the component mounts
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/verifyUser")
+      .get(`${serverEndpoint}/api/verifyUser`)
       .then((res) => {
         if (res.status == 200) {
           console.log("User is verified");
@@ -187,7 +188,7 @@ const RiskPredictionTest = () => {
   const submitForm = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/diabetes-prediction",
+        `${serverEndpoint}/api/diabetes-prediction`,
         formData
       );
 

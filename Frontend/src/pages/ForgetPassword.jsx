@@ -7,6 +7,7 @@ import {
   AlertTitle,
   AlertDescription,
 } from "@chakra-ui/react";
+import { serverEndpoint } from "../config/constants";
 
 import { ChakraProvider, Input, Button, Text } from "@chakra-ui/react";
 import Header from "../components/Header"; // Path to the contact component
@@ -41,7 +42,7 @@ const ForgetPassword = () => {
     // Make a request to your server to reset the password
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/forget-password",
+        `${serverEndpoint}/api/forget-password`,
         {
           email,
         }

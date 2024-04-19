@@ -44,6 +44,7 @@ import DiabetesComPrimary from "../components/DiabetesComPrimary";
 
 import "../styles/GlucoseLog.css"; // Path to CSS file
 import BackToTop from "../components/BackToTop";
+import { serverEndpoint } from "../config/constants";
 
 const GlucoseLog = () => {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ const GlucoseLog = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/verifyUser")
+      .get(`${serverEndpoint}/api/verifyUser`)
       .then((res) => {
         if (res.status == 200) {
           console.log("User is verified");
@@ -117,7 +118,7 @@ const GlucoseLog = () => {
     // Send a DELETE request to the backend
     try {
       const response = await axios.delete(
-        "http://localhost:3000/api/deleteTableRow",
+        `${serverEndpoint}/api/deleteTableRow`,
         {
           data: {
             date: itemToDelete.date,
@@ -269,7 +270,7 @@ const GlucoseLog = () => {
     };
     console.log(newReading);
     try {
-      const response = await axios.post("http://localhost:3000/api/glucose", {
+      const response = await axios.post(`${serverEndpoint}/api/glucose`, {
         date: newReading.date,
         time: newReading.time,
         reading: newReading.reading,

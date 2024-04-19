@@ -13,6 +13,7 @@ import logoutIcon from "../assets/icons/logout.png";
 import Cookies from "js-cookie"; // Import js-cookie
 import axios from "axios";
 import { CgProfile } from "react-icons/cg";
+import { serverEndpoint } from "../config/constants";
 
 const Navbar = () => {
   const { user, setUser } = useContext(UserContext); // Access user and setUser from UserContext
@@ -37,7 +38,7 @@ const Navbar = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("userName");
     axios
-      .get("http://localhost:3000/api/logout")
+      .get(`${serverEndpoint}/api/logout`)
       .then((res) => {
         console.log("Server response", res); // Check the server response
         if (res.status == 200) {

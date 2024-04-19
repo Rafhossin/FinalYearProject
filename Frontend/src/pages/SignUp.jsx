@@ -18,6 +18,7 @@ import {
   AlertTitle,
   AlertDescription,
 } from "@chakra-ui/react";
+import { serverEndpoint } from "../config/constants";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -125,7 +126,7 @@ const SignUp = () => {
     // Check if the employee ID exists
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/employees/check-employee-id",
+        `${serverEndpoint}/api/employees/check-employee-id`,
         {
           employeeId,
         }
@@ -150,18 +151,15 @@ const SignUp = () => {
 
     // Make a request to your server to sign up the user
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/users/signup",
-        {
-          email,
-          password,
-          firstName,
-          surname,
-          gender,
-          dob,
-          employeeId,
-        }
-      );
+      const response = await axios.post(`${serverEndpoint}/api/users/signup`, {
+        email,
+        password,
+        firstName,
+        surname,
+        gender,
+        dob,
+        employeeId,
+      });
 
       const data = response.data;
 
