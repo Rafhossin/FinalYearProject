@@ -33,21 +33,19 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    console.log("handleLogout called"); // Check if handleLogout is called
     // Remove token and user data from session storage
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("userName");
     axios
       .get(`${serverEndpoint}/api/logout`)
       .then((res) => {
-        console.log("Server response", res); // Check the server response
         if (res.status == 200) {
           navigate("/login");
           setUser(null); // Update the user state to null
         }
       })
       .catch((error) => {
-        console.error("Failed to log out", error);
+        console.error("Failed to log out");
       });
   };
 

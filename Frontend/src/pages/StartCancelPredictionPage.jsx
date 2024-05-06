@@ -17,9 +17,8 @@ const StartCancelPrediction = () => {
       .get(`${serverEndpoint}/api/verifyUser`)
       .then((res) => {
         if (res.status == 200) {
-          console.log("User is verified");
+          console.log("");
         } else {
-          console.log("User is not verified");
           navigate("/login");
         }
       })

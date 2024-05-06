@@ -8,12 +8,16 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
 from tensorflow.keras.optimizers import Adam
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score,mean_absolute_error, explained_variance_score
 
 # Load data
 data = pd.read_csv('../../AIBetic2Dataset/HbA1c_prediction_dataset.csv')
+
+# Drop patient_no column if it exists
 if 'patient_no' in data.columns:
     data = data.drop('patient_no', axis=1)
+
+# Drop rows with missing values    
 data = data.ffill().dropna()
 
 # Print head of the data
@@ -91,10 +95,17 @@ print("Test loss:", test_loss)
 
 # Predict using the trained model
 predictions = model.predict(X_test)
+# Calculate metrics
 mse = mean_squared_error(y_test, predictions)
+rmse = np.sqrt(mse)
+mae = mean_absolute_error(y_test, predictions)
 r2 = r2_score(y_test, predictions)
-print("Mean Squared Error:", mse)
-print("R^2 Score:", r2)
+evs = explained_variance_score(y_test, predictions)
 
+print(f'MSE: {mse}')
+print(f'RMSE: {rmse}')
+print(f'MAE: {mae}')
+print(f'R2: {r2}')
+print(f'EVS: {evs}')
 # Save the trained model
 model.save('A1c_model.h5')

@@ -7,7 +7,7 @@
 }
 
 .welcome-message {
-  font-size: 1.5rem; /* Adjust the font size as necessary */
+  font-size: 1.5rem;
   margin-bottom: 1rem; /* Space above the button */
   font: sans-serif;
   font-style: bold;
@@ -37,16 +37,16 @@
 }
 
 .image-section img {
-  width: 85%;
+  width: 65%;
   position: absolute;
   top: 50%;
   left: 50%;
   margin-left: -210px;
   transform: translate(-50%, -50%);
   height: auto; /* Maintain aspect ratio */
-  /* border: 3px solid #ff0000; Add a border around the image */
+
   border-radius: 20px; /* Adjust border-radius for rounded corners */
-  /* width: 100%; Makes the image responsive */
+
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4); /* Horizontal offset, vertical offset, blur radius, and color */
 }
 
@@ -54,23 +54,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* margin-top: 20px; Space below your navbar */
-  /* padding: 2rem; /*Space inside the container*/
-  background-color: #4c7ead;
 
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 72px; /* Spacing from the top, adjust as needed */
-  /* background-color: #f5f5f5; Background color for the section */
+  background-color: #4c7ead;
 }
 
 .diabetes-text {
   flex-basis: 50%; /* Take up half of the container's width */
-  /* Space between the text and image */
-  /* padding-left: 4.5rem; Space between the text and the edge of the container */
+
   margin-left: 3rem;
-  /* margin-right: rem; */
 }
 
 .text-container1 h3.title1 {

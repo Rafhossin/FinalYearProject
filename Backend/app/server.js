@@ -59,6 +59,7 @@ app.use("/api", verifyUserRoutes); // use verify user routes
 app.use("/api", logoutRoutes); // use logout routes
 
 const port = process.env.PORT || 3000;
+//const port = 80;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

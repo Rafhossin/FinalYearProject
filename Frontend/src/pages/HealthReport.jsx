@@ -21,21 +21,22 @@ const HealthReport = () => {
   const { user } = useContext(UserContext); // Get the user data from the UserContext
   const { setUser } = useContext(UserContext);
 
+  // Set the base URL for the axios requests
   axios.defaults.withCredentials = true;
 
+  // Check if the user is logged in
   useEffect(() => {
     axios
       .get(`${serverEndpoint}/api/verifyUser`)
       .then((res) => {
         if (res.status == 200) {
-          console.log("User is verified");
+          console.log("");
         } else {
-          console.log("User is not verified");
           navigate("/login");
         }
       })
       .catch((error) => {
-        console.error("Error verifying user: ", error);
+        console.error("");
         navigate("/login");
       });
   }, []);
@@ -48,20 +49,9 @@ const HealthReport = () => {
 
   const [pageNumber, setPageNumber] = useState(1);
   const [numPages, setNumPages] = useState(null);
-  const [showPagination, setShowPagination] = useState(false); // State to control pagination visibility
+  const [showPagination, setShowPagination] = useState(false);
 
-  // const onDocumentLoadSuccess = ({ numPages }) => {
-  //   setNumPages(numPages);
-  // };
-
-  // const goToPreviousPage = () => {
-  //   setPageNumber((prevPageNum) => Math.max(prevPageNum - 1, 1));
-  // };
-
-  // const goToNextPage = () => {
-  //   setPageNumber((prevPageNum) => Math.min(prevPageNum + 1, numPages));
-  // };
-
+  // State to track if the PDF has been generated
   useEffect(() => {
     if (pageNumber < 1) setPageNumber(1);
     else if (pageNumber > numPages) setPageNumber(numPages);
@@ -70,8 +60,11 @@ const HealthReport = () => {
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
+
+  // Function to generate the PDF
   const generatePDF = (user) => {
     setShowPagination(false); // Disable pagination controls while generating PDF
+    // Define the document structure
     const documentDefinition = {
       pageSize: { width: 1000, height: 800 },
       content: [
@@ -154,7 +147,7 @@ const HealthReport = () => {
                   text: new Date(result.assessment_date).toLocaleDateString(),
                   style: "table",
                 },
-                { text: result.risk_score, style: "table" }, // Assuming 'risk_score' is the field you want to display
+                { text: result.risk_score, style: "table" },
               ]),
             ],
           },
@@ -226,7 +219,6 @@ const HealthReport = () => {
 
     // Create a new PDF
     const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
-    console.log(pdfDocGenerator);
 
     // Before generating the PDF, revoke the previous PDF blob URL to avoid duplicates
     if (pdfUrl) {
@@ -240,10 +232,11 @@ const HealthReport = () => {
         setShowPagination(true);
       })
       .catch((error) => {
-        console.error("Error generating PDF blob: ", error);
+        console.error("");
       });
   };
 
+  // Function to save the PDF
   const handleSaveReport = () => {
     setServerError(null);
     if (pdfUrl) {
@@ -253,13 +246,14 @@ const HealthReport = () => {
         "PDF Saved. Check your downloads folder or your selected download location."
       );
     } else {
-      console.error("No PDF URL available to save");
+      console.error("");
     }
   };
 
+  // Function to generate the PDF
   const handleGeneratePDF = async () => {
     setSuccessMessage(null);
-    console.log("Generating PDF...");
+
     if (isGenerating) {
       return;
     }
@@ -271,10 +265,8 @@ const HealthReport = () => {
       const userData = response.data.user;
       setUser(userData);
 
-      console.log("User data:", userData);
-
       if (response.status == 404) {
-        console.log("User does not exist, please input the correct user Id.");
+        console.log("");
       }
       if (response.status == 200) {
         generatePDF(userData);
@@ -282,13 +274,11 @@ const HealthReport = () => {
       }
     } catch (error) {
       if (error.response.status == 500) {
-        console.log("Server Error");
         setServerError(
           "An error occurred while trying to generate your health report. Please try again later."
         );
         setShowPagination(false); // Ensure pagination controls are hidden on error
       } else {
-        console.error("Failed to fetch user data:", error);
         setServerError(
           "An error occurred while trying to generate your health report. Please try again later."
         );
@@ -397,7 +387,7 @@ const HealthReport = () => {
                       mr={4}
                       onClick={handleGeneratePDF}
                     >
-                      Generate PDF
+                      Generate PDF Report
                     </Button>
                     <Button
                       colorScheme="teal"

@@ -19,7 +19,6 @@ import BackToTop from "../components/BackToTop";
 const homePage = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate(); // Create the navigate function
-  console.log(user);
 
   // Helper function to convert string to camel case
   const toCamelCase = (str) => {

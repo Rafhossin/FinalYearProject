@@ -30,12 +30,13 @@ const ResetPassword = () => {
   const { token } = useParams();
   const navigate = useNavigate();
 
-  // Now you can use the `token` in your component, for example:
+  // useEffect to check if the token is valid
   useEffect(() => {
-    console.log(token); // Log the token from the URL
-    //   // You might want to add logic here to verify the token before allowing a password reset
+    console.log("");
+    //
   }, [token]);
 
+  // Function to validate the password
   const validate = (password) => {
     return {
       password:
@@ -46,6 +47,7 @@ const ResetPassword = () => {
     };
   };
 
+  // Function to handle the reset password
   const handleResetPassword = async (event) => {
     event.preventDefault();
 
@@ -58,12 +60,6 @@ const ResetPassword = () => {
     }
 
     try {
-      // const response = await axios.put(
-      //   `http://localhost:3000/api/reset-password/${token}`,
-      //   {
-      //     password,
-      //   }
-      // );
       const response = await axios.put(
         `${serverEndpoint}/api/reset-password`,
         {
@@ -78,7 +74,6 @@ const ResetPassword = () => {
 
       const data = response.data;
       if (response.status == 200) {
-        console.log(` Password: ${password}`);
         setError("");
         // Redirect the user to the login page
         navigate("/login");

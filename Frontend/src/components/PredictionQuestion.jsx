@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { ChakraProvider, Alert, AlertIcon } from "@chakra-ui/react";
 import { Input, Button, InputGroup, InputRightElement } from "@chakra-ui/react";
@@ -7,7 +7,21 @@ import "../styles/PredictionQuestion.css";
 
 import infoImage from "../assets/images/riskTest/info.png"; // Import the image
 
-const PredictionQuestion = ({ data, handleNextPost, handlePrevPost }) => {
+const PredictionQuestion = ({
+  data,
+  handleNextPost,
+  handlePrevPost,
+  handleCurrAnswer,
+  index,
+}) => {
+  const [chosenOption, setChosenOption] = useState(0);
+
+  useEffect(() => {
+    const res = handleCurrAnswer();
+
+    setChosenOption(res);
+  }, [data]);
+
   return (
     <ChakraProvider>
       <div className="main-container-pred">
@@ -22,18 +36,24 @@ const PredictionQuestion = ({ data, handleNextPost, handlePrevPost }) => {
                 </div>
                 <h2>{data.description}</h2>
                 <div className="buttons-prediction">
-                  <Button colorScheme="teal" size="lg" onClick={handlePrevPost}>
+                  <Button
+                    style={{ visibility: index === 0 ? "hidden" : "visible" }}
+                    colorScheme="teal"
+                    size="lg"
+                    onClick={handlePrevPost}
+                  >
                     <ArrowBackIcon boxSize={8} />
                   </Button>
+
                   <Button
-                    colorScheme="teal"
+                    colorScheme={chosenOption === 1 ? "red" : "teal"}
                     size="lg"
                     onClick={() => handleNextPost(1, data.type)}
                   >
                     YES
                   </Button>
                   <Button
-                    colorScheme="teal"
+                    colorScheme={chosenOption === 0 ? "red" : "teal"}
                     size="lg"
                     onClick={() => handleNextPost(0, data.type)}
                   >

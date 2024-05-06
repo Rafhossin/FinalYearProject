@@ -63,9 +63,6 @@ img {
   justify-content: center; /* Center items horizontally */
   align-items: center; /* Center items vertically */
   transition: transform 0.4s ease; /* Smooth transition for hover effects */
-  /* padding: 0.5rem 1rem; Add some padding inside the button */
-  /* If you don't want the button to take up the full height of the navbar,
-       you can specify a height for the button */
 }
 
 .navbar-account button:hover {

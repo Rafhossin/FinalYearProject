@@ -22,22 +22,22 @@ import { Box, Flex, Stack, Radio, RadioGroup } from "@chakra-ui/react";
 const BMI = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext); // Get the user data from the UserContext
-  console.log("User: ", user);
+
+  // Set the base URL for the axios requests
   axios.defaults.withCredentials = true;
 
+  // Check if the user is logged in
   useEffect(() => {
     axios
       .get(`${serverEndpoint}/api/verifyUser`)
       .then((res) => {
         if (res.status == 200) {
-          console.log("User is verified");
+          console.log("");
         } else {
-          console.log("User is not verified");
           navigate("/login");
         }
       })
       .catch((error) => {
-        console.error("Error verifying user: ", error);
         navigate("/login");
       });
   }, []);
@@ -59,10 +59,6 @@ const BMI = () => {
 
   // Add a new state variable
   const [bmiCategory, setBmiCategory] = useState("");
-
-  // const toggleUnitSystem = () => {
-  //   setUnitSystem(unitSystem === "metric" ? "imperial" : "metric");
-  // };
 
   // Function to handle the button click
   const calculateBMI = async () => {
@@ -138,25 +134,25 @@ const BMI = () => {
 
       const data = response.data;
       if (response.status == 404) {
-        console.log("User does not exist, please input the correct user Id.");
+        console.log("");
         // Redirect the user to the login page
       }
       if (response.status == 200) {
-        console.log(data.result);
-        console.log(data.message);
+        console.log("");
+        console.log("");
         // Redirect the user to the login page
       }
       if (data.success) {
         // The sign up was successful, continue with the sign up process
-        console.log(response.data);
+        console.log("");
         // Log Employee Id
       }
     } catch (error) {
       if (error.response.status == 500) {
-        console.log("Server Error");
+        console.log("");
         return;
       } else {
-        console.error("Error: ", error);
+        console.error(" ");
       }
       return;
     }

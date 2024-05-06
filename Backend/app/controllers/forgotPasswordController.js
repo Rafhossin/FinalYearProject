@@ -29,13 +29,6 @@ export const forgotPasswordController = async (req, res) => {
       },
     });
 
-    // var mailOptions = {
-    //   from: "aibetic2projectteam@gmail.com",
-    //   to: email,
-    //   subject: "Reset Password",
-    //   text: `http://localhost:5173/reset-password/${token}`,
-    // };
-
     var mailOptions = {
       from: "aibetic2projectteam@gmail.com",
       to: email,

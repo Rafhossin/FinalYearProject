@@ -11,7 +11,6 @@ const AboutDiabetesSecondary = ({
 }) => {
   return (
     <>
-      {/* {console.log({ bgcolor })} */}
       {/* Logs the color prop when the component renders */}
       <div className="main-container3" style={{ backgroundColor: bgcolor }}>
         <div className="text-container3">
