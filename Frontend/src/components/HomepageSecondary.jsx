@@ -13,7 +13,6 @@ const HomepageSecondary = ({
 }) => {
   return (
     <>
-      {/* {console.log({ bgcolor })} */}
       {/* Logs the color prop when the component renders */}
       <div className="main-container2" style={{ backgroundColor: bgcolor }}>
         <div className="image-container2">

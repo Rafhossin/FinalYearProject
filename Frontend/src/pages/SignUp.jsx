@@ -9,9 +9,11 @@ import {
   Button,
   InputGroup,
   InputRightElement,
+  Checkbox,
 } from "@chakra-ui/react";
 import "../styles/SignUpStyles.css";
 import { Link as ChakraLink } from "@chakra-ui/react";
+
 import {
   Alert,
   AlertIcon,
@@ -29,6 +31,7 @@ const SignUp = () => {
   const [gender, setGender] = useState("");
   const [dob, setDob] = useState("");
   const [employeeId, setEmployeeId] = useState(""); // New state variable for Employee Id
+  const [consent, setConsent] = useState(false);
 
   const navigate = useNavigate();
 
@@ -41,7 +44,8 @@ const SignUp = () => {
     email,
     password,
     confirmPassword,
-    employeeId
+    employeeId,
+    consent
   ) => {
     return {
       firstName: firstName.length === 0,
@@ -59,6 +63,7 @@ const SignUp = () => {
       confirmPassword:
         confirmPassword.length === 0 || password !== confirmPassword,
       employeeId: employeeId.length === 0, // New validation for Employee Id
+      consent: !consent, // Validation to ensure consent is given
     };
   };
 
@@ -90,7 +95,7 @@ const SignUp = () => {
     sixteenYearsAgo.getMonth() + 1
   ).padStart(2, "0")}-${String(sixteenYearsAgo.getDate()).padStart(2, "0")}`;
 
-  // Update your handleSignUp function like this
+  // Function to handle sign up
   const handleSignUp = async (event) => {
     event.preventDefault();
 
@@ -102,7 +107,8 @@ const SignUp = () => {
       email,
       password,
       confirmPassword,
-      employeeId
+      employeeId,
+      consent
     );
     const isEnabled = !Object.keys(errors).some((x) => errors[x]);
 
@@ -135,21 +141,21 @@ const SignUp = () => {
       const data = response.data;
 
       if (response.status == 200) {
-        console.log(data.message);
+        console.log("");
       }
     } catch (error) {
       if (error.response.status == 404) {
         // The employee ID does not exist, show an error message and stop the sign up process
         setEmployeeIdError("The employee ID does not exist");
-        // console.log(employeeIdError);
+
         return;
       } else {
-        console.error("Error: ", error);
+        console.error("");
       }
       return;
     }
 
-    // Make a request to your server to sign up the user
+    // Make a request to server to sign up the user
     try {
       const response = await axios.post(`${serverEndpoint}/api/users/signup`, {
         email,
@@ -164,22 +170,18 @@ const SignUp = () => {
       const data = response.data;
 
       if (response.status == 201) {
-        console.log(data.result);
         // Redirect the user to the login page
         navigate("/login");
       }
       if (data.success) {
-        // The sign up was successful, continue with the sign up process
-        console.log(
-          `Email: ${email}, Password: ${password}, First Name: ${firstName}, Surname: ${surname}, Gender: ${gender}, Date of Birth: ${dob}, Employee Id: ${employeeId}`
-        ); // Log Employee Id
+        console.log("");
       }
     } catch (error) {
       if (error.response.status == 400) {
         setUserExistsError(true);
         return;
       } else {
-        console.error("Error: ", error);
+        console.error(" ");
       }
       return;
     }
@@ -195,6 +197,7 @@ const SignUp = () => {
     setEmployeeId(""); // Clear Employee Id
   };
 
+  // useEffect to clear the userExistsError after 5 seconds
   useEffect(() => {
     let timer;
     if (userExistsError) {
@@ -265,10 +268,15 @@ const SignUp = () => {
                     value={dob}
                     onChange={(e) => {
                       const selectedDate = new Date(e.target.value);
-                      if (selectedDate > sixteenYearsAgo) {
-                        setDobError("You must be at least 16 years old");
-                      } else if (selectedDate < minDateObj) {
+                      if (selectedDate < minDateObj) {
                         setDobError("Date of birth cannot be before 1900");
+                      } else if (
+                        selectedDate > sixteenYearsAgo &&
+                        selectedDate <= today
+                      ) {
+                        setDobError("You must be at least 16 years old");
+                      } else if (today < selectedDate) {
+                        setDobError("Date of birth cannot be in the future");
                       } else {
                         setDobError("");
                       }
@@ -383,6 +391,36 @@ const SignUp = () => {
                     <AlertDescription>User already exists!</AlertDescription>
                   </Alert>
                 )}
+
+                <div>
+                  <Checkbox
+                    id="consent"
+                    name="consent"
+                    isChecked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    isRequired
+                  >
+                    I agree to the{" "}
+                    <ChakraLink
+                      as={Link}
+                      to="/terms-of-use"
+                      color="teal"
+                      _hover={{ color: "#d9534f" }}
+                    >
+                      Terms and Conditions
+                    </ChakraLink>{" "}
+                    and{" "}
+                    <ChakraLink
+                      as={Link}
+                      to="/privacy-policy"
+                      color="teal"
+                      _hover={{ color: "#d9534f" }}
+                    >
+                      Privacy Policy
+                    </ChakraLink>
+                  </Checkbox>
+                </div>
+
                 <div className="signup-btn">
                   <Button colorScheme="teal" size="lg" type="submit">
                     Sign Up

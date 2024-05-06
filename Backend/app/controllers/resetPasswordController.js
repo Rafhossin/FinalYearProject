@@ -39,9 +39,8 @@ export const resetPasswordController = async (req, res) => {
 
     // Directly hash the password and store in password_hash
     const hashedPassword = await bcrypt.hash(password, 10);
-    user.password_hash = hashedPassword; // Update this field directly
-    // Optionally set 'password' to undefined if your schema/middleware requires it
-    // user.password = undefined;
+    user.password_hash = hashedPassword; // Update the password_hash field
+
     await user.save();
 
     return res.status(200).json({ message: "Password updated successfully" });

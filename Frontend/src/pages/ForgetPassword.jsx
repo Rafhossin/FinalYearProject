@@ -39,7 +39,7 @@ const ForgetPassword = () => {
       return;
     }
 
-    // Make a request to your server to reset the password
+    // Make a request to  server to reset the password
     try {
       const response = await axios.post(
         `${serverEndpoint}/api/forget-password`,

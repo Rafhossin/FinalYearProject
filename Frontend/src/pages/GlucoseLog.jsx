@@ -50,18 +50,20 @@ const GlucoseLog = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext); // Get the user data from the UserContext
   const { setUser } = useContext(UserContext);
-  let existingGlucoseReadings = []; // Initialize the existing glucose readings
+  let existingGlucoseReadings = []; // Initialise the existing glucose readings
 
+  // Set the base URL for the axios requests
   axios.defaults.withCredentials = true;
 
+  // useEffect to verify the user
   useEffect(() => {
     axios
       .get(`${serverEndpoint}/api/verifyUser`)
       .then((res) => {
         if (res.status == 200) {
-          console.log("User is verified");
+          console.log("");
         } else {
-          console.log("User is not verified");
+          console.log("");
           navigate("/login");
         }
       })
@@ -71,12 +73,10 @@ const GlucoseLog = () => {
       });
   }, []);
 
-  console.log("User: ", user);
+  // Check if the user has a health profile and get the existing glucose readings
   if (user && user.health_profile) {
     existingGlucoseReadings = user.health_profile.glucose_readings;
   }
-
-  console.log("Existing Glucose Readings: ", existingGlucoseReadings);
 
   const [glucoseReadings, setGlucoseReadings] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -91,10 +91,12 @@ const GlucoseLog = () => {
   const [inputDate, setInputDate] = useState("");
   const [inputTime, setInputTime] = useState("");
 
+  // Set the initial table data to the existing glucose readings
   let [tableData, setTableData] = useState([...existingGlucoseReadings]);
 
   const [filteredReading, setFilteredReadings] = useState([]);
 
+  // Filter the readings based on the selected time period
   useEffect(() => {
     setTableData(
       filteredReading.map((reading) => {
@@ -105,11 +107,10 @@ const GlucoseLog = () => {
     );
   }, [filteredReading]);
 
+  // Function to handle the deletion of a row
   const handleDelete = async (index) => {
     // Store the item to delete
     const itemToDelete = tableData[index];
-
-    console.log("Item to delete-----: ", itemToDelete.glucose_level);
 
     // Delete the row at the given index
     tableData.splice(index, 1);
@@ -132,22 +133,18 @@ const GlucoseLog = () => {
 
       const data = response.data;
       if (response.status == 404) {
-        console.log("User does not exist, please input the correct user Id.");
+        console.log("");
       }
       if (response.status == 200) {
-        console.log(data.result);
-        console.log(data.message);
-
         setSuccessMessage2(data.message);
       }
       if (data.success) {
         // The sign up was successful, continue with the sign up process
-        console.log(response.data);
+        console.log("");
         // Log Employee Id
       }
     } catch (error) {
       if (error.response.status == 500) {
-        console.log("Server Error");
         setServerError(
           "An error occurred while trying to delete your glucose readings. Please try again later."
         );
@@ -247,10 +244,9 @@ const GlucoseLog = () => {
     const [time] = fullTime.split(".");
     return { ...reading, date, time };
   });
-  console.log("Table Data: ", tableData);
 
+  // Function to handle the glucose log
   const handleGlucoseLog = async () => {
-    console.log("Readings for today: ", readingsForToday);
     if (readingsForchosenDate.length > 3) {
       setErrorMessage("You can input at most 4 readings per day.");
       return;
@@ -261,14 +257,18 @@ const GlucoseLog = () => {
     } else if (glucoseReading < 0) {
       setErrorMessage("Glucose reading cannot be negative");
       return;
+    } else if (glucoseReading > 33.3) {
+      setErrorMessage("Glucose reading cannot exceed 33.3 mmol/L");
+      return;
     }
 
+    // Create a new reading object
     const newReading = {
       date: inputDate,
       time: inputTime,
       reading: glucoseReading,
     };
-    console.log(newReading);
+
     try {
       const response = await axios.post(`${serverEndpoint}/api/glucose`, {
         date: newReading.date,
@@ -280,23 +280,16 @@ const GlucoseLog = () => {
 
       const data = response.data;
       if (response.status == 404) {
-        console.log("User does not exist, please input the correct user Id.");
-        // Redirect the user to the login page
+        console.log("");
       }
       if (response.status == 200) {
-        console.log(data.result);
-        console.log(data.message);
-        // Redirect the user to the login page
         setSuccessMessage(data.message);
       }
       if (data.success) {
-        // The sign up was successful, continue with the sign up process
-        console.log(response.data);
-        // Log Employee Id
+        console.log("");
       }
     } catch (error) {
       if (error.response.status == 500) {
-        console.log("Server Error");
         setServerError(
           "An error occurred while trying to log your glucose reading. Please try again later."
         );
@@ -312,6 +305,25 @@ const GlucoseLog = () => {
 
     setGlucoseReadings([...glucoseReadings, newReading]);
     setGlucoseReading("");
+  };
+  let today = new Date();
+  let pastDate = new Date();
+  pastDate.setDate(today.getDate() - 30);
+
+  // Function to handle the date change
+  const handleDateChange = (e) => {
+    let selectedDate = new Date(e.target.value);
+    if (selectedDate > today || selectedDate < pastDate) {
+      setErrorMessage(
+        "Date must be within the last 30 days and cannot be in the future"
+      );
+    } else {
+      setInputDate(e.target.value);
+      setErrorMessage(null);
+      setSuccessMessage(null);
+      setSuccessMessage2(null);
+      setServerError(null);
+    }
   };
 
   return (
@@ -478,14 +490,9 @@ const GlucoseLog = () => {
                           mt={1}
                           type="date"
                           value={inputDate}
-                          onChange={(e) => {
-                            setInputDate(e.target.value);
-                            setErrorMessage(null);
-                            setSuccessMessage(null);
-                            setSuccessMessage2(null);
-                            setServerError(null);
-                          }}
-                          max={new Date().toISOString().slice(0, 10)} // Prevent future dates from being selected
+                          onChange={handleDateChange}
+                          min={pastDate.toISOString().slice(0, 10)}
+                          max={today.toISOString().slice(0, 10)}
                         />
                       </label>
                     </Box>
@@ -664,7 +671,7 @@ const GlucoseLog = () => {
           paragraph={
             "In addition to your routine blood sugar self-checks, your medical team will typically require you to undergo an HbA1c blood test at least annually. The HbA1c test measures your average blood glucose levels over the past three months, providing you and your healthcare providers with insights into long-term glucose trends.This test is a crucial part of your diabetes health care routine, and comprehending your results is vital. Elevated HbA1c levels indicate excessive sugar in your bloodstream, increasing the likelihood of complications related to diabetes, such as severe eye and foot conditions. Therefore, it's essential to get this test done consistently. Doing so will help you make informed adjustments to your diabetes management plan, aiming to decrease the chances of complications."
           }
-          btnText={"Forcast Your HbA1c Test"}
+          btnText={"Forecast Your HbA1c Test"}
           imagePath={logGlucoseImage}
           altText={"Log Glucose Image"}
           color={"#D0E1EE"}

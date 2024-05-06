@@ -18,7 +18,7 @@ export const diabetesPredictionController = async (req, res) => {
     alopecia,
     itching,
   } = req.body;
-  console.log("dataaaaa", itching);
+
   console.log("dataaaaa", req.body);
 
   const userId = req.user.user_id; // Extracted from decoded JWT
@@ -95,16 +95,14 @@ export const diabetesPredictionController = async (req, res) => {
     console.error(error);
     if (error.response) {
       // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
+
+      console.log("Error");
     } else if (error.request) {
       // The request was made but no response was received
-      console.log(error.request);
+      console.log("Error");
     } else {
       // Something happened in setting up the request that triggered an Error
-      console.log("Error", error.message);
+      console.log("Error");
     }
     res.status(500).json({ status: 500, message: "Server Error" });
   }

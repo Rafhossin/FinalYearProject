@@ -24,9 +24,8 @@ export const hbA1cPredictionController = async (req, res) => {
           "User not found. Please ensure the correct user ID is provided.",
       });
     }
-    console.log("User: ", user);
-    // Assuming glucose readings are stored in health_profile.glucose_readings
-    // and we need the last 20 readings
+
+    // Extract the last 20 glucose readings from the user's health profile
     const glucoseReadings = user.health_profile.glucose_readings
       .slice(-20)
       .map((reading) => reading.glucose_level);
@@ -65,6 +64,7 @@ export const hbA1cPredictionController = async (req, res) => {
       message: "HbA1c prediction has been made successfully.",
       predicted_hba1c: response.data.predicted_hba1c,
       readings: glucoseReadings, // Include the actual readings used for the prediction
+      risk_score: ` ${riskFactor}`,
       user: user, // Return the updated user data
     });
   } catch (error) {

@@ -16,6 +16,7 @@ const SignIn = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  // Function to validate the email and password
   const validate = (email, password) => {
     return {
       email:
@@ -26,9 +27,13 @@ const SignIn = () => {
   };
 
   const [show, setShow] = React.useState(false);
+  // Function to toggle the password visibility
   const handleClick = () => setShow(!show);
 
+  // Set the base URL for the axios requests
   axios.defaults.withCredentials = true;
+
+  // Function to handle the sign in form submission
   const handleSignIn = async (event) => {
     event.preventDefault();
 
@@ -49,9 +54,9 @@ const SignIn = () => {
       const data = response.data;
       if (response.status === 200 && data.token) {
         // Checking for successful response and existence of the token
-        // Assuming  backend response includes the user object with a name
+
         sessionStorage.setItem("token", data.token);
-        sessionStorage.setItem("userName", data.user.user_first_name); // Make sure the user object has a firstName property
+        sessionStorage.setItem("userName", data.user.user_first_name); // Store the user's first name in sessionStorage
 
         setUser(data.user); // Set the user state in the UserContext
 

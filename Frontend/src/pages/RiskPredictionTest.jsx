@@ -29,8 +29,6 @@ const RiskPredictionTest = () => {
   const { user } = useContext(UserContext); // Get the user data from the UserContext
   const { setUser } = useContext(UserContext);
 
-  console.log("User: ", user);
-
   const [predictionResult, setPredictionResult] = useState(null);
   axios.defaults.withCredentials = true;
 
@@ -40,9 +38,6 @@ const RiskPredictionTest = () => {
       .get(`${serverEndpoint}/api/verifyUser`)
       .then((res) => {
         if (res.status == 200) {
-          console.log("User is verified");
-          // fetchGender(); // Call fetchGender after verifying the user
-          // calculateAge(); // Call calculateAge after verifying the user
           const dob = new Date(user.date_of_birth); // Convert date_of_birth to a Date object
           const diff_ms = Date.now() - dob.getTime();
           const age_dt = new Date(diff_ms);
@@ -57,7 +52,6 @@ const RiskPredictionTest = () => {
 
           setFormData({ ...formData, age: age, gender: genderValue }); // Update formData with age and gender
         } else {
-          console.log("User is not verified");
           navigate("/login");
         }
       })
@@ -67,24 +61,27 @@ const RiskPredictionTest = () => {
       });
   }, []);
 
+  // Set the initial state of the formData and the headIndex and indexQuestion
   const [formData, setFormData] = useState({
     age: 0,
     gender: 0,
     suddenWeightLoss: 1,
     polyphagia: 1,
-    polydipsia: 1,
     polyuria: 1,
+    polydipsia: 1,
+    partialParesis: 1,
     visualBlurring: 1,
+    irritability: 1,
     weakness: 1,
     delayedHealing: 1,
     alopecia: 1,
     itching: 1,
-    irritability: 1,
-    partialParesis: 1,
   });
 
+  const [headIndex, setHeadIndex] = useState(0);
   const [indexQuestion, setIndexQuestion] = useState(0);
 
+  // Array of questions with their respective symptoms, descriptions, images, and types
   const questions = [
     {
       symptom: "Have you experienced any sudden weight loss recently?",
@@ -185,6 +182,7 @@ const RiskPredictionTest = () => {
     },
   ];
 
+  // Function to submit the form data to the server
   const submitForm = async () => {
     try {
       const response = await axios.post(
@@ -196,21 +194,20 @@ const RiskPredictionTest = () => {
       setUser(response.data.user);
 
       if (response.status == 200) {
-        console.log("Prediction: ", response.data.prediction);
-        console.log("User: ", response.data.user);
         setPredictionResult(response.data.prediction);
       }
     } catch (error) {
       if (error.response.status == 500) {
-        console.error("Error submitting form: ", error);
+        console.error("Error");
         return;
       } else {
-        console.error("Error: ", error);
+        console.error("Error: ");
       }
       return;
     }
   };
 
+  // Function to handle the next question
   const handleNextPost = async (answer, type) => {
     if (indexQuestion === questions.length - 1) {
       // submit form
@@ -220,8 +217,28 @@ const RiskPredictionTest = () => {
     }
     setFormData({ ...formData, [type]: answer });
     setIndexQuestion((prevIndex) => prevIndex + 1);
+    if (indexQuestion < headIndex) {
+      return;
+    } else {
+      if (headIndex < questions.length + 1) {
+        setHeadIndex((prevIndex) => prevIndex + 1);
+      }
+    }
   };
 
+  // Function to handle the current answer
+  const handleCurrAnswer = () => {
+    if (indexQuestion < headIndex) {
+      let values = Object.values(formData);
+      const formD = values.slice(2);
+
+      let valueAtIndex = formD[indexQuestion];
+
+      return valueAtIndex;
+    }
+  };
+
+  // Function to handle the previous question
   const handlePrevPost = () => {
     if (indexQuestion === 0) {
       return;
@@ -236,7 +253,7 @@ const RiskPredictionTest = () => {
         headingTitle2={"Take The Type 2 Diabetes Prediction Test"}
         headerColor={"#008080"}
       />
-      {console.log(formData)}
+
       {predictionResult === "positive" ? (
         <PredictionResults
           heading1={"You Are Highly Likely to Be Diabetic (Type 2)"}
@@ -263,6 +280,8 @@ const RiskPredictionTest = () => {
         />
       ) : (
         <PredictionQuestion
+          index={indexQuestion}
+          handleCurrAnswer={handleCurrAnswer}
           handleNextPost={handleNextPost}
           handlePrevPost={handlePrevPost}
           data={questions[indexQuestion]}

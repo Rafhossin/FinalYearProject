@@ -19,16 +19,17 @@ const HbA1cPredictionTest = () => {
   const { user } = useContext(UserContext); // Get the user data from the UserContext
   const { setUser } = useContext(UserContext);
   let existingGlucoseReadings = []; // Initialize the existing glucose readings
+  // Set the base URL for the axios requests
   axios.defaults.withCredentials = true;
 
+  // useEffect to verify the user
   useEffect(() => {
     axios
       .get(`${serverEndpoint}/api/verifyUser`)
       .then((res) => {
         if (res.status == 200) {
-          console.log("User is verified");
+          console.log("");
         } else {
-          console.log("User is not verified");
           navigate("/login");
         }
       })
@@ -38,23 +39,20 @@ const HbA1cPredictionTest = () => {
       });
   }, []);
 
-  console.log("User: ", user);
+  // Check if the user has any existing glucose readings
   if (user && user.health_profile) {
     existingGlucoseReadings = user.health_profile.glucose_readings;
   }
 
-  //print the existing glucose readings length
-  console.log("Existing Glucose Readings: ", existingGlucoseReadings.length);
-
-  console.log("Existing Glucose Readings: ", existingGlucoseReadings);
-
   const [errorMessage, setErrorMessage] = useState("");
   const [errorMessage1, setErrorMessage1] = useState("");
 
-  const [successMessage, setSuccessMessage] = useState("");
+  // Define two state variables for the success messages
+  const [successMessage1, setSuccessMessage1] = useState("");
+  const [successMessage2, setSuccessMessage2] = useState("");
   const [predictedHbA1c, setPredictedHbA1c] = useState(null); // State for predicted HbA1c
 
-  // Function to handle the button click
+  // Function to handle the health report
   const handleHealthReport = () => {
     if (
       user &&
@@ -72,6 +70,7 @@ const HbA1cPredictionTest = () => {
     }
   };
 
+  // Function to generate the HbA1c message based on the predicted HbA1c
   const generateHbA1cMessage = () => {
     if (!predictedHbA1c) {
       return ""; // Default message
@@ -85,6 +84,7 @@ const HbA1cPredictionTest = () => {
     }
   };
 
+  // Function to handle the HbA1c prediction
   const handleHbA1cPrediction = async () => {
     // Check if the user has enough readings
     if (existingGlucoseReadings.length < 20) {
@@ -104,19 +104,20 @@ const HbA1cPredictionTest = () => {
         }
       );
 
-      console.log("API Response:", response);
       // Update the UserContext with the returned user data
       setUser(response.data.user);
 
       if (response.status == 200) {
-        console.log("HbA1c prediction successful");
-        console.log(response.data);
         setPredictedHbA1c(response.data.predicted_hba1c); // Update the predicted HbA1c state
-        // Display the success message with the predicted HbA1c
-        setSuccessMessage(`Predicted HbA1c: ${response.data.predicted_hba1c}`);
+
+        // Update the success messages separately
+        setSuccessMessage1(`Predicted HbA1c: ${response.data.predicted_hba1c}`);
+        setSuccessMessage2(`HbA1c risk score is: ${response.data.risk_score}`);
       }
       if (response.status == 404) {
-        console.log("User does not exist, please input the correct user Id.");
+        setErrorMessage(
+          "We encountered an issue while trying to fetch your HbA1c prediction. Please try again later."
+        );
         return;
       }
       if (response.status !== 200) {
@@ -126,15 +127,14 @@ const HbA1cPredictionTest = () => {
         return;
       }
       if (data.success) {
-        // The sign up was successful, continue with the sign up process
-        console.log(response.data);
+        console.log("");
       }
     } catch (error) {
       if (error.response.status == 500) {
-        console.log("Server Error");
+        console.log("");
         return;
       } else {
-        console.error("Error: ", error);
+        console.error(" ");
       }
       return;
     }
@@ -145,7 +145,7 @@ const HbA1cPredictionTest = () => {
       <div className="main-container">
         <Header
           headingTitle1={"Tools& Resources"}
-          headingTitle2={"HbA1c Forcasting Test"}
+          headingTitle2={"HbA1c Forecasting Test"}
           headerColor={"#008080"}
         />
         <DiabetesComPrimary
@@ -180,9 +180,9 @@ const HbA1cPredictionTest = () => {
           <div className="target-range">
             <h1>Your HbA1c Results:</h1>
             <div className="glucose-meter">
-              <h2>Blood Glucose Monitor</h2>
+              <h2>HbA1c Result Monitor</h2>
               <p className="dp1">
-                To forcast your HbA1c click the button below
+                To forecast your HbA1c click the button below
               </p>
               <div className="dp1">
                 <ChakraProvider>
@@ -206,15 +206,26 @@ const HbA1cPredictionTest = () => {
                   >
                     Result
                   </Button>
-                  {successMessage && (
+                  {successMessage1 && (
                     <Alert
                       status="success"
                       variant="left-accent"
-                      style={{ width: "800px" }}
-                      marginTop="40px"
+                      style={{ width: "800px", fontSize: "30px" }}
+                      marginBottom="10px"
                     >
                       <AlertIcon />
-                      {successMessage}
+                      {successMessage1}
+                    </Alert>
+                  )}
+                  {successMessage2 && (
+                    <Alert
+                      status="success"
+                      variant="left-accent"
+                      style={{ width: "800px", fontSize: "30px" }}
+                      marginBottom="20px"
+                    >
+                      <AlertIcon />
+                      {successMessage2}
                     </Alert>
                   )}
                 </ChakraProvider>

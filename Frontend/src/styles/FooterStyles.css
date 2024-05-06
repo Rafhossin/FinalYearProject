@@ -91,7 +91,7 @@
   }
 }
 
-/* If you need even more control on smaller screens, such as mobile phones */
+/* Responsive styles - when the screen width is 480px or less */
 @media (max-width: 480px) {
   /* Add any additional styles for very small screens here */
 }

@@ -41,6 +41,7 @@ const UpdateProfile = () => {
   const { user } = useContext(UserContext); // Get the user data from the UserContext
   const handleClick = () => setShow(!show);
 
+  // Function to validate the email and password
   const validate = (email, password) => {
     const errors = {
       email:
@@ -63,11 +64,10 @@ const UpdateProfile = () => {
     return errors.email || errors.password;
   };
 
+  // Function to update the email
   const handleUpdateEmail = async (event) => {
     event.preventDefault();
-    const token = sessionStorage.getItem("token"); // Change this line
-    console.log(token);
-    console.log(user._id);
+    const token = sessionStorage.getItem("token"); // Get the token from the session storage
 
     if (!validate(email, "")) {
       try {
@@ -87,7 +87,6 @@ const UpdateProfile = () => {
         const data = response.data;
 
         if (response.status == 200) {
-          console.log(data.result);
           // Redirect the user to the login page
           setEmailUpdated(true);
           setTimeout(() => setEmailUpdated(false), 5000);
@@ -96,8 +95,7 @@ const UpdateProfile = () => {
           setError("An unexpected error occurred,please try again later");
         }
         if (data.success) {
-          // The sign up was successful, continue with the sign up process
-          console.log(`email: ${email}`);
+          console.log("");
         }
 
         // Handle response...
@@ -115,11 +113,11 @@ const UpdateProfile = () => {
     }
   };
 
+  // Function to update the password
   const handleUpdatePassword = async (event) => {
     event.preventDefault();
     const token = sessionStorage.getItem("token");
-    console.log(token);
-    console.log(user._id);
+
     if (!validate("", password)) {
       try {
         const response = await axios.put(
@@ -134,7 +132,6 @@ const UpdateProfile = () => {
         const data = response.data;
 
         if (response.status == 200) {
-          console.log(data.result);
           // Redirect the user to the login page
           setPasswordUpdated(true);
           setTimeout(() => setPasswordUpdated(false), 5000);
@@ -143,8 +140,7 @@ const UpdateProfile = () => {
           setError("An unexpected error occurred,please try again later");
         }
         if (data.success) {
-          // The sign up was successful, continue with the sign up process
-          console.log(`Password: ${password}`);
+          console.log("");
         }
 
         // Handle response...

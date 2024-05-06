@@ -6,17 +6,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* margin-top: 40px; Space below your navbar */
-  /* padding: 1rem; /*Space inside the container */
-  /* background-color: #303030; */
 }
 .text-container1 {
   flex-basis: 50%; /* Take up half of the container's width */
-  /* Space between the text and image */
-  /* padding-left: 4.5rem; Space between the text and the edge of the container */
-  padding-left: 3rem;
 
-  /* margin-right: rem; */
+  padding-left: 3rem;
 }
 
 .text-container1 h2.title2 {
